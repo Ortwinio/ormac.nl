@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Geist, Newsreader } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { site } from "@/lib/site";
+import { hreflangUrls } from "@/lib/i18n";
+import { localeMetadata } from "@/lib/metadata";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,34 +16,28 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${site.name} — Early-stage investing`,
-    template: `%s — ${site.name}`,
-  },
-  description: site.description,
-  metadataBase: new URL("https://ormac.nl"),
-  openGraph: {
-    title: `${site.name} — Early-stage investing`,
-    description: site.description,
-    url: "https://ormac.nl",
-    siteName: site.name,
-    images: [{ url: "/images/hero.jpg", width: 1280, height: 720 }],
-    locale: "en_NL",
-    type: "website",
-  },
-};
+export const metadata: Metadata = localeMetadata("nl");
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const headerList = await headers();
+  const path = headerList.get("x-ormac-path") ?? "/";
+  const locale = path === "/en" || path.startsWith("/en/") ? "en" : "nl";
+  const urls = hreflangUrls(locale, path.includes("privacy") ? "privacy" : "");
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${geistSans.variable} ${newsreader.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="alternate" hrefLang="nl" href={urls.languages.nl} />
+        <link rel="alternate" hrefLang="en" href={urls.languages.en} />
+        <link rel="alternate" hrefLang="x-default" href={urls.languages["x-default"]} />
+        <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        {children}
       </body>
     </html>
   );

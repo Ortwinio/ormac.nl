@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 540" role="img" aria-label="Ormac">
+  <rect x="0" y="0" width="520" height="540" rx="96" fill="#123C39"/>
+  <g transform="translate(52 54) scale(0.8)" fill="none" stroke-width="46" stroke-linecap="round">
+    <path d="M153 395 A195 195 0 1 1 442 317 C408 390 297 430 238 497" stroke="#F2F3EF"/>
+    <path d="M250 335 C205 350 138 331 122 273 A148 148 0 1 1 410 266 C395 335 210 414 85 497" stroke="#E2C27F"/>
+  </g>
+</svg>
