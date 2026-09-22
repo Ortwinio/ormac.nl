@@ -13,7 +13,23 @@ export type Copy = {
   privacy: {
     title: string;
     lead: string;
-    body: string[];
+    updated: string;
+    controllerTitle: string;
+    controller: string;
+    preview: string;
+    sections: { id: string; title: string; paragraphs: string[] }[];
+    cookiesTitle: string;
+    cookiesIntro: string;
+    cookiePurpose: string;
+    cookieDuration: string;
+    languagePurpose: string;
+    languageDuration: string;
+    noticePurpose: string;
+    noticeDuration: string;
+    cookieControls: string;
+    contactTitle: string;
+    contact: string;
+    authority: string;
   };
   nav: { id: SectionId; label: string }[];
   ctaPlan: string;
@@ -24,6 +40,7 @@ export type Copy = {
     title: string;
     lead: string;
     body: string;
+    note: string;
   };
   stats: { value: string; label: string }[];
   difference: {
@@ -85,6 +102,7 @@ export type Copy = {
     steps: { title: string; body: string }[];
     boardTitle: string;
     board: string[];
+    boardQuote: string;
     gtmTitle: string;
     gtm: string;
     afterTitle: string;
@@ -144,6 +162,8 @@ export type Copy = {
     title: string;
     intro: string;
     need: string;
+    needTitle: string;
+    needs: string[];
     emailHint: string;
     general: string;
     plans: string;

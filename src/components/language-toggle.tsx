@@ -2,10 +2,10 @@
 
 import { localeCookie, localePath, type Locale } from "@/lib/i18n";
 import { copy } from "@/lib/copy";
-import { cn } from "@/lib/utils";
+import styles from "./ormac.module.css";
 
 function remember(locale: Locale) {
-  document.cookie = `${localeCookie}=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+  document.cookie = `${localeCookie}=${locale}; path=/; max-age=31536000; SameSite=Lax${window.location.protocol === "https:" ? "; Secure" : ""}`;
 }
 
 export function LanguageToggle({ locale }: { locale: Locale }) {
@@ -14,23 +14,19 @@ export function LanguageToggle({ locale }: { locale: Locale }) {
   function go(next: Locale) {
     remember(next);
     const hash = window.location.hash;
-    window.location.assign(localePath(next) + hash);
+    const privacy = window.location.pathname.replace(/\/$/, "").endsWith("/privacy");
+    window.location.assign(localePath(next) + (privacy ? "privacy/" : "") + hash);
   }
 
   return (
     <div
-      className="inline-flex items-center rounded-full border border-current/20 p-0.5 text-[0.7rem] tracking-[0.16em]"
+      className={styles.language}
       role="group"
       aria-label={t.switchTo}
     >
       <button
         type="button"
-        className={cn(
-          "rounded-full px-2.5 py-1 uppercase transition-colors",
-          locale === "nl"
-            ? "bg-current/15 font-medium"
-            : "opacity-60 hover:opacity-100"
-        )}
+        aria-pressed={locale === "nl"}
         aria-current={locale === "nl" ? "true" : undefined}
         onClick={() => go("nl")}
       >
@@ -38,12 +34,7 @@ export function LanguageToggle({ locale }: { locale: Locale }) {
       </button>
       <button
         type="button"
-        className={cn(
-          "rounded-full px-2.5 py-1 uppercase transition-colors",
-          locale === "en"
-            ? "bg-current/15 font-medium"
-            : "opacity-60 hover:opacity-100"
-        )}
+        aria-pressed={locale === "en"}
         aria-current={locale === "en" ? "true" : undefined}
         onClick={() => go("en")}
       >

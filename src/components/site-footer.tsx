@@ -1,73 +1,38 @@
-import Link from "next/link";
+import { SectionLink as Link } from "@/components/section-link";
+import { Brand } from "@/components/brand";
+import { CookieNotice } from "@/components/cookie-notice";
 import { copy } from "@/lib/copy";
 import { localePath, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import s from "./ormac.module.css";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const home = localePath(locale);
-  const privacyHref = locale === "en" ? "/en/privacy/" : "/privacy/";
-
+  const nl = locale === "nl";
   return (
-    <footer className="border-t border-white/10 bg-[#123C39] text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-3">
-        <div>
-          <Link href={`${home}#home`} className="flex items-center gap-2.5">
-            <img
-              src="/brand/beeldmerk-on-dark.svg"
-              alt="Ormac"
-              width={36}
-              height={38}
-              className="h-9 w-auto"
-            />
-            <span className="text-[0.8rem] font-medium tracking-[0.22em] uppercase">
-              {site.name}
-            </span>
-          </Link>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
-            {t.footer.tagline}
-          </p>
-        </div>
-        <div>
-          <p className="text-[0.7rem] tracking-[0.18em] text-white/45 uppercase">
-            {t.nav[6].label}
-          </p>
-          <div className="mt-3 flex flex-col gap-2 text-sm text-white/80">
-            <a className="hover:text-white" href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
-            <a className="hover:text-white" href={`mailto:${site.planEmail}`}>
-              {site.planEmail}
-            </a>
-            <a
-              className="hover:text-white"
-              href={site.linkedin}
-              rel="noreferrer"
-              target="_blank"
-            >
-              LinkedIn
-            </a>
+    <footer className={s.footer}>
+      <div className={s.wrap}>
+        <div className={s.footerTop}>
+          <div className={s.footerBrand}>
+            <Link href={`${home}#home`} aria-label="Ormac – home"><Brand /></Link>
+            <p>{t.hero.title}.</p>
+            <Link href={`${home}#contact`} className={`${s.button} ${s.gold}`}>{t.ctaPlan}</Link>
+          </div>
+          <nav aria-label="Footer">
+            {t.nav.filter(item => item.id !== "home" && item.id !== "contact").map(item => <Link key={item.id} href={`${home}#${item.id}`}>{item.label}</Link>)}
+            <Link href={`${home}#faq`}>{nl ? "Veelgestelde vragen" : "FAQ"}</Link>
+          </nav>
+          <div className={s.footerMails}>
+            <span>{nl ? "Vragen via LinkedIn" : "Questions via LinkedIn"}</span><a href={site.linkedin} target="_blank" rel="noreferrer">Ortwin Verreck</a>
+            <span>{nl ? "Plannen indienen" : "Submitting plans"}</span><Link href={`${home}#contact`}>{nl ? "Via het formulier" : "Use the form"}</Link>
           </div>
         </div>
-        <nav className="flex flex-col gap-2 text-sm text-white/80" aria-label="Footer">
-          {t.nav.map((item) => (
-            <Link key={item.id} className="hover:text-white" href={`${home}#${item.id}`}>
-              {item.label}
-            </Link>
-          ))}
-          <Link className="hover:text-white" href={privacyHref}>
-            {t.footer.privacy}
-          </Link>
-        </nav>
-      </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-5 py-5 text-[0.7rem] tracking-wide text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p>
-            © {new Date().getFullYear()} {t.footer.legal}. {t.footer.rights}
-          </p>
-          <p>
-            KvK {site.kvk} · VAT {site.vat}
-          </p>
+        <div className={s.footerBottom}>
+          <p>{t.footer.legal} Smart capital {nl ? "sinds" : "since"} 2002. © {new Date().getFullYear()}</p>
+          <Link href={nl ? "/privacy/#privacy-top" : "/en/privacy/#privacy-top"}>{t.footer.privacy}</Link>
+          <CookieNotice locale={locale} />
+          <Link href={nl ? "/en/" : "/"} lang={nl ? "en" : "nl"}>{nl ? "English" : "Nederlands"}</Link>
         </div>
       </div>
     </footer>

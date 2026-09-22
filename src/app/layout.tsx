@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Geist, Newsreader } from "next/font/google";
+import { Schibsted_Grotesk, Source_Sans_3 } from "next/font/google";
 import { hreflangUrls } from "@/lib/i18n";
 import { localeMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
   subsets: ["latin"],
   style: ["normal", "italic"],
 });
@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${schibsted.variable} h-full antialiased`}
     >
       <head>
         <link rel="alternate" hrefLang="nl" href={urls.languages.nl} />

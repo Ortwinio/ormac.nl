@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-heading: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-heading: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --color-gold: var(--gold);
   --color-gold-ink: var(--gold-ink);
   --color-teal: var(--teal);
@@ -54,28 +54,35 @@
 
 :root {
   --teal: #123c39;
-  --gold: #d2a84f;
+  --gold: #e2c27f;
   --gold-light: #e2c27f;
-  --gold-ink: #8a6a28;
+  --gold-ink: #8a5f17;
+  --gold-soft: #fbf5e8;
+  --field: #ffffff;
   --cream: #f2f3ef;
-  --paper: #faf9f5;
-  --background: #faf9f5;
-  --foreground: #123c39;
-  --card: #fffcf6;
-  --card-foreground: #123c39;
-  --popover: #fffcf6;
-  --popover-foreground: #123c39;
+  --paper: #f2f3ef;
+  --background: #f2f3ef;
+  --foreground: #172221;
+  --heading: #123c39;
+  --body-text: #3f4b49;
+  --forest: #123c39;
+  --on-forest: #dce6e0;
+  --card: #ffffff;
+  --card-foreground: #172221;
+  --popover: #ffffff;
+  --popover-foreground: #172221;
   --primary: #123c39;
+  --primary-hover: #1b4d49;
   --primary-foreground: #f2f3ef;
-  --secondary: #ece8dc;
+  --secondary: #e4ece6;
   --secondary-foreground: #123c39;
-  --muted: #ece8dc;
-  --muted-foreground: #4d635f;
+  --muted: #e4ece6;
+  --muted-foreground: #4e5b59;
   --accent: #efe4c8;
   --accent-foreground: #123c39;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #d9d4c6;
-  --input: #d9d4c6;
+  --border: #d6dbd5;
+  --input: #b9c3bc;
   --ring: #d2a84f;
   --chart-1: #123c39;
   --chart-2: #d2a84f;
@@ -93,25 +100,37 @@
   --sidebar-ring: #d2a84f;
 }
 
-.dark {
-  --background: #123c39;
-  --foreground: #f2f3ef;
-  --card: #174744;
-  --card-foreground: #f2f3ef;
-  --popover: #174744;
-  --popover-foreground: #f2f3ef;
+@media (prefers-color-scheme: dark) {
+:root {
+  color-scheme: dark;
+  --background: #0e1716;
+  --paper: #0e1716;
+  --foreground: #eaf0ec;
+  --heading: #d5e6dc;
+  --body-text: #c3cfca;
+  --forest: #0b2826;
+  --on-forest: #c9d8d0;
+  --gold-ink: #e2c27f;
+  --gold-soft: #2a2618;
+  --field: #101a19;
+  --card: #15201e;
+  --card-foreground: #eaf0ec;
+  --popover: #15201e;
+  --popover-foreground: #eaf0ec;
   --primary: #e2c27f;
-  --primary-foreground: #123c39;
-  --secondary: #1d524e;
+  --primary-hover: #ebd198;
+  --primary-foreground: #172221;
+  --secondary: #1e2e2b;
   --secondary-foreground: #f2f3ef;
-  --muted: #1d524e;
-  --muted-foreground: #c5cdc8;
-  --accent: #1d524e;
+  --muted: #1e2e2b;
+  --muted-foreground: #a5b4ae;
+  --accent: #1e2e2b;
   --accent-foreground: #f2f3ef;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgb(242 243 239 / 12%);
-  --input: rgb(242 243 239 / 15%);
+  --border: #2b3a37;
+  --input: #3a4a46;
   --ring: #e2c27f;
+}
 }
 
 @layer base {
@@ -120,6 +139,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 18px;
+    line-height: 1.6;
   }
   html {
     @apply font-sans scroll-smooth;
@@ -130,6 +151,17 @@
   h3,
   h4 {
     font-family: var(--font-heading);
-    font-weight: 450;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
+  :focus-visible { outline: 3px solid var(--gold-ink); outline-offset: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (max-width: 820px) {
+  body { font-size: 17px; }
 }

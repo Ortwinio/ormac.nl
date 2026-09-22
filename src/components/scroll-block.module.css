@@ -1,0 +1,28 @@
+.scene { position: relative; display: flow-root; scroll-margin-top: 92px; }
+.pin { display: flow-root; }
+.content { display: flow-root; background: var(--background); transform-origin: center top; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .scene[data-scroll-active] {
+    margin-bottom: calc(-1 * var(--scroll-distance));
+  }
+  .scene[data-scroll-active]::after { content: ""; display: block; height: var(--scroll-distance); }
+  .scene[data-scroll-active] > .pin {
+    position: sticky;
+    top: var(--scroll-top);
+    z-index: 1;
+  }
+  .scene[data-scroll-active] > .pin > .content {
+    opacity: var(--scroll-opacity, 1);
+    transform: scale(var(--scroll-scale, 1));
+  }
+  .scene[data-departed]:not(:focus-within) > .pin { pointer-events: none; }
+  .scene:focus-within > .pin > .content { opacity: 1; transform: none; }
+}
+
+@media print {
+  .scene[data-scroll-active] { margin-bottom: 0; }
+  .scene[data-scroll-active]::after { display: none; }
+  .scene[data-scroll-active] > .pin { position: static; }
+  .scene[data-scroll-active] > .pin > .content { opacity: 1; transform: none; }
+}

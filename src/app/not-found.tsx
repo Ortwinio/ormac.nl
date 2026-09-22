@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollBlock } from "@/components/scroll-block";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ export default function NotFound() {
 
   return (
     <SiteShell locale={locale}>
+      <ScrollBlock>
       <div className="flex min-h-[70vh] flex-col items-center justify-center bg-background px-5 pt-24 text-center">
         <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
           404
@@ -28,6 +30,7 @@ export default function NotFound() {
           {t.notFound.back}
         </Button>
       </div>
+      </ScrollBlock>
     </SiteShell>
   );
 }

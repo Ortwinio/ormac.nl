@@ -1,660 +1,209 @@
+import { ScrollBlock } from "@/components/scroll-block";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { SectionLink as Link } from "@/components/section-link";
+import { Check } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
-import { Button } from "@/components/ui/button";
+import { GrowthRoute } from "@/components/growth-route";
 import { copy } from "@/lib/copy";
 import { localePath, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import s from "./ormac.module.css";
+
+const domainImages = ["health", "learning", "marketing", "business"];
+const roundNames = ["Seed", "Early growth", "Scale-up"];
+const roundAmounts = ["€25k – €50k", "€50k – €100k", "€50k – €100k"];
+const portfolioMarks = ["WisePIM", "ActARion", "Four Oaks"];
 
 export function OrmacPage({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const home = localePath(locale);
+  const nl = locale === "nl";
+  const timing = nl ? ["1–2 weken", "ongeveer 1 week", "2–4 weken", "", ""] : ["1–2 weeks", "about 1 week", "2–4 weeks", "", ""];
+  const statValues = ["2002", nl ? "€1,15m" : "€1.15m", "6", "80+"];
+  const statLabels = [t.stats[0].label, t.stats[1].label, nl ? "succesvolle exits" : "successful exits", nl ? "experts in ons netwerk" : "experts in our network"];
+  const planLink = `${home}#contact`;
 
   return (
     <>
-      <section
-        id="home"
-        className="relative isolate flex min-h-[100svh] items-end overflow-hidden scroll-mt-24"
-      >
-        <Image
-          src="/images/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[center_35%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#123C39] via-[#123C39]/70 to-[#123C39]/25" />
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-28 sm:px-8 sm:pb-24 sm:pt-32">
-          <p className="text-[0.72rem] tracking-[0.28em] text-[var(--gold-light,#E2C27F)] uppercase">
-            {t.hero.eyebrow}
-          </p>
-          <h1 className="font-heading mt-5 max-w-3xl text-[2.35rem] leading-[1.12] text-white sm:text-6xl sm:leading-[1.08]">
-            {t.hero.title}
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-            {t.hero.lead}
-          </p>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
-            {t.hero.body}
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button
-              nativeButton={false}
-              render={<Link href={`${home}#contact`} />}
-              variant="gold"
-              size="lg"
-              className="h-11 rounded-full px-6"
-            >
-              {t.ctaPlan}
-              <ArrowRight data-icon="inline-end" />
-            </Button>
-            <Button
-              nativeButton={false}
-              render={<Link href={`${home}#approach`} />}
-              variant="outline"
-              size="lg"
-              className="h-11 rounded-full border-white/25 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
-            >
-              {t.ctaApproach}
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#123C39]">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px sm:grid-cols-4">
-          {t.stats.map((item) => (
-            <div key={item.value} className="px-5 py-6 sm:px-8 sm:py-8">
-              <p className="font-heading text-lg text-white sm:text-xl">{item.value}</p>
-              <p className="mt-2 text-sm text-white/60">{item.label}</p>
+      <ScrollBlock id="home">
+        <section className={`${s.wrap} ${s.hero}`}>
+          <div>
+            <p className={s.eyebrow}>{t.hero.eyebrow}</p>
+            <h1>{t.hero.title}</h1>
+            <p className={s.heroLead}>{t.hero.lead}</p>
+            <p className={s.heroIntro}>{t.hero.body}</p>
+            <div className={s.ctas}>
+              <Link href={planLink} className={s.button}>{t.ctaPlan}</Link>
+              <Link href={`${home}#stages`} className={`${s.button} ${s.outline}`}>{t.ctaApproach}</Link>
             </div>
-          ))}
-        </div>
-      </section>
+            <p className={s.heroNote}>{t.hero.note}</p>
+          </div>
+          <GrowthRoute locale={locale} />
+        </section>
+      </ScrollBlock>
 
-      <section className="bg-background">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
-          {t.difference.items.map((item, index) => (
-            <article key={item.title} className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
-              <p className="text-[0.7rem] tracking-[0.22em] text-[var(--gold-ink)] uppercase">
-                {t.difference.eyebrow} 0{index + 1}
-              </p>
-              <h2 className="font-heading mt-3 text-2xl tracking-tight sm:text-3xl">
-                {item.title}
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {item.body}
-              </p>
-            </article>
-          ))}
+      <ScrollBlock>
+        <div className={s.wrap}>
+          <section className={s.stats} aria-label={nl ? "Ormac in cijfers" : "Ormac in numbers"}>
+            {statValues.map((value, index) => <div key={value}><strong>{value}</strong><span>{statLabels[index]}</span></div>)}
+          </section>
         </div>
-      </section>
+      </ScrollBlock>
 
-      <section className="bg-[#f2f3ef]">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
-          <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-            {t.offer.eyebrow}
-          </p>
-          <h2 className="font-heading mt-4 max-w-xl text-3xl leading-tight tracking-tight sm:text-4xl">
-            {t.offer.title}
-          </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {t.offer.items.map((item) => (
-              <article key={item.title} className="border-t border-border pt-6">
-                <h3 className="font-heading text-xl tracking-tight">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
+      <ScrollBlock>
+        <section className={`${s.wrap} ${s.block}`}>
+          <h2 className={s.sectionTitle}>{t.difference.title}</h2>
+          <div className={s.usp}>
+            {t.difference.items.map((item, index) => (
+              <article key={item.title} className={`${s.uspCard} ${index === 0 ? s.darkCard : ""}`}>
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  {index === 0 ? <><circle cx="22" cy="22" r="18" /><path d="M14 26l6-6 5 4 7-9M28 15h4v4" /></> : <path d="M6 36L18 24l8 6 12-18M30 12h8v8M6 40h32" />}
+                </svg>
+                <h3>{item.title}</h3><p>{item.body}</p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollBlock>
 
-      <section className="bg-background">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-28">
-          <div>
-            <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-              {t.focus.eyebrow}
-            </p>
-            <h2 className="font-heading mt-4 text-3xl leading-tight tracking-tight sm:text-4xl">
-              {t.focus.title}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t.focus.body}
-            </p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {t.focus.areas.map((area) => (
-                <li
-                  key={area}
-                  className="rounded-full border border-border bg-card px-4 py-2 text-sm"
-                >
-                  {area}
-                </li>
-              ))}
-            </ul>
+      <ScrollBlock id="founders">
+        <section className={`${s.wrap} ${s.block} ${s.offer}`}>
+          <h2 className={s.sectionTitle}>{t.offer.title}</h2>
+          <div className={s.four}>
+            {t.offer.items.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}
           </div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-            <Image
-              src="/images/marketing-media.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 28rem, 100vw"
-              className="object-cover"
-            />
+          <div className={`${s.splitHead} ${s.sectionGap}`}>
+            <h2 className={s.sectionTitle}>{t.focus.title}</h2><p className={s.lead}>{t.focus.body}</p>
           </div>
-        </div>
-      </section>
-
-      <section className="bg-[#123C39] text-white">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-24">
-          <p className="text-[0.72rem] tracking-[0.22em] text-[var(--gold)] uppercase">
-            {t.stages.eyebrow}
-          </p>
-          <h2 className="font-heading mt-4 max-w-3xl text-3xl leading-tight sm:text-4xl">
-            {t.stages.title}
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70">
-            {t.stages.body}
-          </p>
-          <Button
-            nativeButton={false}
-            render={<Link href={`${home}#founders`} />}
-            variant="gold"
-            size="lg"
-            className="mt-8 h-11 rounded-full px-6"
-          >
-            {t.ctaApproach}
-            <ArrowRight data-icon="inline-end" />
-          </Button>
-        </div>
-      </section>
-
-      <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-          <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-            {t.track.eyebrow}
-          </p>
-          <h2 className="font-heading mt-4 text-2xl tracking-tight sm:text-3xl">
-            {t.track.title}
-          </h2>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {t.track.logos.map((name) => (
-              <span
-                key={name}
-                className="rounded-full border border-border bg-card px-4 py-2 text-sm text-foreground/80"
-              >
-                {name}
-              </span>
-            ))}
+          <div className={s.domains}>
+            {t.focus.areas.map((area, index) => <figure key={area}>
+              <Image src={`/images/${domainImages[index]}.webp`} alt="" width={800} height={800} sizes="(max-width: 820px) 45vw, 22vw" />
+              <figcaption>{area}</figcaption>
+            </figure>)}
           </div>
-        </div>
-      </section>
-
-      <section className="bg-[#f2f3ef]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h2 className="font-heading text-3xl leading-tight sm:text-4xl">
-              {t.closing.title}
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {t.closing.body}
-            </p>
+          <div className={`${s.splitHead} ${s.sectionGap}`}>
+            <h2 className={s.sectionTitle}>{t.founders.title}</h2><p className={s.lead}>{t.founders.intro}</p>
           </div>
-          <Button
-            nativeButton={false}
-            render={<Link href={`${home}#contact`} />}
-            size="lg"
-            className="h-11 rounded-full px-6"
-          >
-            {t.ctaPlan}
-            <ArrowRight data-icon="inline-end" />
-          </Button>
-        </div>
-      </section>
-
-      <section id="founders" className="scroll-mt-24 bg-background">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
-          <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-            {t.founders.eyebrow}
-          </p>
-          <h2 className="font-heading mt-4 max-w-3xl text-3xl leading-tight tracking-tight sm:text-4xl">
-            {t.founders.title}
-          </h2>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            {t.founders.intro}
-          </p>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.founders.criteriaTitle}
-          </h3>
-          <ol className="mt-8 grid gap-6 md:grid-cols-2">
-            {t.founders.criteria.map((item, index) => (
-              <li
-                key={item.title}
-                className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8"
-              >
-                <p className="text-[0.7rem] tracking-[0.22em] text-[var(--gold-ink)] uppercase">
-                  0{index + 1}
-                </p>
-                <h4 className="font-heading mt-3 text-xl tracking-tight">{item.title}</h4>
-                <p className="mt-2 text-sm italic text-foreground/80">{item.question}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </li>
-            ))}
+          <ol className={s.criteria}>
+            {t.founders.criteria.map((item, index) => <li className={s.criterion} key={item.title}>
+              <span className={s.number}>{index + 1}</span><h3>{item.title}</h3>
+              <p className={s.question}>{item.question}</p><p>{item.body}</p>
+            </li>)}
           </ol>
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            <div>
-              <h3 className="font-heading text-xl tracking-tight">
-                {t.founders.notYetTitle}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t.founders.notYet}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-heading text-xl tracking-tight">
-                {t.founders.notInTitle}
-              </h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
-                {t.founders.notIn.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+          <div className={s.twoNotes}>
+            <article><h3>{t.founders.notYetTitle}</h3><p>{t.founders.notYet}</p></article>
+            <article><h3>{t.founders.notInTitle}</h3><ul>{t.founders.notIn.map(item => <li key={item}>{item}</li>)}</ul></article>
           </div>
-          <h3 className="font-heading mt-16 text-2xl tracking-tight">
-            {t.founders.howTitle}
-          </h3>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            {t.founders.howIntro}
-          </p>
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            {t.founders.rounds.map((round) => (
-              <article
-                key={round.title}
-                className="rounded-2xl border border-border bg-card p-6"
-              >
-                <h4 className="font-heading text-xl tracking-tight">{round.title}</h4>
-                <p className="mt-2 text-sm italic text-foreground/80">{round.stage}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {round.body}
-                </p>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 text-sm font-medium">{t.founders.max}</p>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.founders.togetherTitle}
-          </h3>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            {t.founders.together}
-          </p>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.founders.getTitle}
-          </h3>
-          <ul className="mt-6 grid gap-3 md:grid-cols-2">
-            {t.founders.get.map((item) => (
-              <li
-                key={item}
-                className="border-l-2 border-[var(--gold)] pl-4 text-sm leading-relaxed text-muted-foreground"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-sm text-foreground">{t.founders.free}</p>
-        </div>
-      </section>
+        </section>
+      </ScrollBlock>
 
-      <section id="approach" className="scroll-mt-24 bg-[#f2f3ef]">
-        <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-28">
-          <div>
-            <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-              {t.approach.eyebrow}
-            </p>
-            <h2 className="font-heading mt-4 text-3xl leading-tight tracking-tight sm:text-4xl">
-              {t.approach.title}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t.approach.intro}
-            </p>
-            <div className="relative mt-10 hidden aspect-[4/5] overflow-hidden rounded-3xl lg:block">
-              <Image
-                src="/images/bridge.jpg"
-                alt=""
-                fill
-                sizes="28rem"
-                className="object-cover"
-              />
+      <ScrollBlock id="stages">
+        <section className={`${s.surface} ${s.block}`}>
+          <div className={s.wrap}>
+            <div className={s.splitHead}><h2 className={s.sectionTitle}>{t.founders.howTitle}</h2><p className={s.lead}>{t.founders.howIntro}</p></div>
+            <div className={s.phases}>
+              {t.founders.rounds.map((round, index) => <article className={s.phase} key={round.title}>
+                <span className={s.dot}>{index + 1}</span><h3>{roundNames[index]}</h3><p className={s.amount}>{roundAmounts[index]}</p>
+                <p>{round.body}</p><p className={s.condition}>{round.stage}</p>
+              </article>)}
+            </div>
+            <div className={s.strip}>
+              <div><strong>{nl ? "Maximaal €250.000 per deelneming" : "Up to €250,000 per company"}</strong><p>{t.founders.free}</p></div>
+              <Link href={planLink} className={`${s.button} ${s.gold}`}>{t.ctaPlan}</Link>
+            </div>
+            <p className={s.together}><strong>{t.founders.togetherTitle}. </strong>{t.founders.together}</p>
+          </div>
+        </section>
+      </ScrollBlock>
+
+      <ScrollBlock id="approach">
+        <section className={`${s.wrap} ${s.block}`}>
+          <h2 className={s.sectionTitle}>{t.approach.title}</h2>
+          <ol className={s.steps}>
+            {t.approach.steps.map((step, index) => <li key={step.title}>
+              <span className={s.number}>{index + 1}{timing[index] && ` · ${timing[index]}`}</span>
+              <h3>{step.title.replace(/\s*\([^)]*\)\s*$/, "")}</h3><p>{step.body}</p>
+            </li>)}
+          </ol>
+          <div className={s.advisory}>
+            <Image src="/images/advisory.webp" width={1100} height={734} sizes="(max-width: 820px) 90vw, 45vw" alt={nl ? "Pentekening van een team in overleg" : "Pen drawing of a team in discussion"} />
+            <div className={s.textStack}><h2 className={s.sectionTitle}>{t.approach.boardTitle}</h2><p>{t.approach.board[0]}</p><blockquote className={s.boardQuote}>{t.approach.boardQuote}</blockquote><p>{t.approach.board[1]}</p></div>
+          </div>
+          <div className={s.gtm}>
+            <h2 className={s.sectionTitle}>{t.approach.gtmTitle}</h2>
+            <div className={s.textStack}><p>{t.approach.gtm}</p>{t.approach.after.map(p => <p key={p}>{p}</p>)}</div>
+          </div>
+        </section>
+      </ScrollBlock>
+
+      <ScrollBlock id="network">
+        <section className={`${s.network} ${s.block}`}>
+          <div className={`${s.wrap} ${s.networkGrid}`}>
+            <div className={s.textStack}><span className={s.networkNumber}>80+</span><h2 className={s.sectionTitle}>{t.network.title}</h2><p>{t.network.intro}</p><p>{t.network.how}</p></div>
+            <div><h3>{t.network.areasTitle}</h3><ul className={s.chips}>{t.network.areas.map(area => <li key={area.title}>{area.title}</li>)}</ul>
             </div>
           </div>
-          <div>
-            <h3 className="font-heading text-xl tracking-tight">
-              {t.approach.stepsTitle}
-            </h3>
-            <ol className="mt-6 space-y-5">
-              {t.approach.steps.map((step, index) => (
-                <li key={step.title} className="rounded-2xl border border-border bg-card p-5">
-                  <p className="text-[0.7rem] tracking-[0.22em] text-[var(--gold-ink)] uppercase">
-                    0{index + 1}
-                  </p>
-                  <h4 className="font-heading mt-2 text-lg tracking-tight">{step.title}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {step.body}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 pb-20 sm:px-8 lg:grid-cols-3 lg:pb-28">
-          <article>
-            <h3 className="font-heading text-xl tracking-tight">{t.approach.boardTitle}</h3>
-            {t.approach.board.map((paragraph) => (
-              <p key={paragraph} className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {paragraph}
-              </p>
-            ))}
-          </article>
-          <article>
-            <h3 className="font-heading text-xl tracking-tight">{t.approach.gtmTitle}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t.approach.gtm}
-            </p>
-          </article>
-          <article>
-            <h3 className="font-heading text-xl tracking-tight">{t.approach.afterTitle}</h3>
-            {t.approach.after.map((paragraph) => (
-              <p key={paragraph} className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {paragraph}
-              </p>
-            ))}
-            <h3 className="font-heading mt-8 text-xl tracking-tight">
-              {t.approach.exitTitle}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t.approach.exit}
-            </p>
-          </article>
-        </div>
-      </section>
+        </section>
+      </ScrollBlock>
 
-      <section id="network" className="scroll-mt-24 bg-background">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-            <div>
-              <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-                {t.network.eyebrow}
-              </p>
-              <h2 className="font-heading mt-4 max-w-2xl text-3xl leading-tight tracking-tight sm:text-4xl">
-                {t.network.title}
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                {t.network.intro}
-              </p>
-            </div>
-            <div className="relative aspect-[3/2] overflow-hidden rounded-3xl">
-              <Image
-                src="/images/advisory-board.jpg"
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 28rem, 100vw"
-                className="object-cover"
-              />
+      <ScrollBlock id="portfolio">
+        <section className={`${s.wrap} ${s.block}`}>
+          <div className={s.splitHead}><h2 className={s.sectionTitle}>{t.portfolio.title}</h2><p className={s.lead}>{t.portfolio.intro}</p></div>
+          <h3 className={s.subhead}>{t.portfolio.activeTitle}</h3>
+          <div className={s.active}>{t.portfolio.active.map((item, index) => <article key={item.name}><div className={s.logoTile} aria-hidden="true">{portfolioMarks[index]}</div><h4>{item.name}</h4><p>{item.body}</p></article>)}</div>
+          <div className={s.portfolioSubhead}><h3>{t.portfolio.exitsTitle}</h3><span>{nl ? "Logo’s van eerdere deelnemingen" : "Logos of previous investments"}</span></div>
+          <ul className={s.exits}>{t.portfolio.exits.map(item => <li key={item.name}><b>{item.name}</b><span className={s.pill}>Exit</span></li>)}</ul>
+          <div className={s.exitDescriptions}>{t.portfolio.exits.map(item => <p key={item.name}><b>{item.name}</b> – {item.body}</p>)}</div>
+          <div className={s.failed}>
+            {t.portfolio.failed.map(item => <article key={item.name}><h4>{item.name}</h4><p>{item.body}</p></article>)}
+            <blockquote className={s.lesson}>{t.portfolio.learned}</blockquote>
+          </div>
+        </section>
+      </ScrollBlock>
+
+      <ScrollBlock id="about">
+        <section className={`${s.surface} ${s.block}`}>
+          <div className={`${s.wrap} ${s.about}`}>
+            <Image className={s.portrait} src="/images/ortwin-verreck.webp" alt={t.about.founderName} width={1040} height={1200} sizes="(max-width: 820px) 90vw, 40vw" />
+            <div className={s.textStack}>
+              <h2 className={s.sectionTitle}>{t.about.title}</h2><p>{t.about.intro}</p>
+              <div className={s.bio}><h3>{t.about.founderName}, {t.about.founderRole}</h3>{t.about.founder.map(p => <p key={p}>{p}</p>)}</div>
+              <div className={s.values}>{t.about.stand.map(item => <article key={item.title}><h4>{item.title}</h4><p>{item.body}</p></article>)}</div>
+              <p>{t.about.together}</p>
             </div>
           </div>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.network.areasTitle}
-          </h3>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {t.network.areas.map((area) => (
-              <article key={area.title} className="border-t border-border pt-4">
-                <h4 className="font-heading text-base tracking-tight">{area.title}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {area.body}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-12 grid gap-8 lg:grid-cols-3">
-            <article>
-              <h3 className="font-heading text-xl tracking-tight">{t.network.howTitle}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t.network.how}
-              </p>
-            </article>
-            <article>
-              <h3 className="font-heading text-xl tracking-tight">{t.network.coTitle}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t.network.co}
-              </p>
-            </article>
-            <article>
-              <h3 className="font-heading text-xl tracking-tight">{t.network.ecoTitle}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t.network.eco}
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+        </section>
+      </ScrollBlock>
 
-      <section id="portfolio" className="scroll-mt-24 bg-[#f2f3ef]">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
-          <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-            {t.portfolio.eyebrow}
-          </p>
-          <h2 className="font-heading mt-4 max-w-2xl text-3xl leading-tight tracking-tight sm:text-4xl">
-            {t.portfolio.title}
-          </h2>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            {t.portfolio.intro}
-          </p>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.portfolio.activeTitle}
-          </h3>
-          <div className="mt-6 grid gap-6 lg:grid-cols-3">
-            {t.portfolio.active.map((item) => (
-              <article key={item.name} className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-heading text-xl tracking-tight">{item.name}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </article>
-            ))}
+      <ScrollBlock id="contact">
+        <section className={`${s.wrap} ${s.block} ${s.plan}`}>
+          <div className={`${s.textStack} ${s.planIntro}`}>
+            <h2 className={s.sectionTitle}>{t.contact.title}</h2><p>{t.contact.intro}</p><h3>{t.contact.needTitle}</h3>
+            <ul className={s.checks}>{t.contact.needs.map(need => <li key={need}><Check size={20} strokeWidth={2} aria-hidden="true" />{need}</li>)}</ul>
+            <p className={s.heroNote}>{t.contact.confidential}</p>
           </div>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.portfolio.exitsTitle}
-          </h3>
-          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {t.portfolio.exits.map((item) => (
-              <article key={item.name} className="border-t border-border pt-5">
-                <h4 className="font-heading text-lg tracking-tight">{item.name}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </article>
-            ))}
-          </div>
-          <h3 className="font-heading mt-14 text-2xl tracking-tight">
-            {t.portfolio.failedTitle}
-          </h3>
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {t.portfolio.failed.map((item) => (
-              <article key={item.name} className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-heading text-lg tracking-tight">{item.name}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </article>
-            ))}
-          </div>
-          <blockquote className="mt-10 border-l-2 border-[var(--gold)] pl-5 text-foreground">
-            {t.portfolio.learned}
-          </blockquote>
-        </div>
-      </section>
+          <ContactForm locale={locale} />
+        </section>
+      </ScrollBlock>
 
-      <section id="about" className="scroll-mt-24 bg-background">
-        <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.8fr)] lg:py-28">
-          <div>
-            <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-              {t.about.eyebrow}
-            </p>
-            <h2 className="font-heading mt-4 text-3xl leading-tight tracking-tight sm:text-4xl">
-              {t.about.title}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t.about.intro}
-            </p>
-            <h3 className="font-heading mt-10 text-xl tracking-tight">
-              {t.about.missionTitle}
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              {t.about.mission}
-            </p>
-            <h3 className="font-heading mt-10 text-xl tracking-tight">
-              {t.about.standTitle}
-            </h3>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              {t.about.stand.map((item) => (
-                <article key={item.title}>
-                  <h4 className="font-heading text-lg tracking-tight">{item.title}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {item.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-            <h3 className="font-heading mt-12 text-xl tracking-tight">
-              {t.about.togetherTitle}
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              {t.about.together}
-            </p>
-            <h3 className="font-heading mt-10 text-xl tracking-tight">
-              {t.about.whereTitle}
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              {t.about.where}
-            </p>
+      <ScrollBlock id="faq">
+        <section className={`${s.surface} ${s.block}`}>
+          <div className={`${s.wrap} ${s.faq}`}>
+            <h2 className={s.sectionTitle}>{t.faq.title}</h2>
+            <div className={s.faqItems}>{t.faq.items.map((item, index) => <details key={item.q} open={index === 0}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div>
           </div>
-          <aside className="rounded-3xl border border-border bg-card p-6 sm:p-8">
-            <div className="relative mx-auto aspect-[13/15] w-full max-w-xs overflow-hidden rounded-2xl bg-[#ece8dc]">
-              <Image
-                src="/images/ortwin-verreck.jpg"
-                alt={t.about.founderName}
-                fill
-                sizes="20rem"
-                className="object-cover object-top"
-              />
-            </div>
-            <p className="mt-6 text-[0.7rem] tracking-[0.18em] text-muted-foreground uppercase">
-              {t.about.founderTitle}
-            </p>
-            <h3 className="font-heading mt-2 text-2xl tracking-tight">
-              {t.about.founderName}
-            </h3>
-            <p className="mt-1 text-sm text-muted-foreground">{t.about.founderRole}</p>
-            {t.about.founder.map((paragraph) => (
-              <p key={paragraph} className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {paragraph}
-              </p>
-            ))}
-            <a
-              href={site.linkedin}
-              className="mt-5 inline-flex text-sm underline underline-offset-4"
-              rel="noreferrer"
-              target="_blank"
-            >
-              {t.about.linkedin}
-            </a>
-          </aside>
-        </div>
-      </section>
+        </section>
+      </ScrollBlock>
 
-      <section className="bg-[#f2f3ef]">
-        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-24">
-          <h2 className="font-heading text-3xl tracking-tight">{t.faq.title}</h2>
-          <div className="mt-8 divide-y divide-border border-y border-border">
-            {t.faq.items.map((item) => (
-              <details key={item.q} className="group py-4">
-                <summary className="cursor-pointer list-none font-medium marker:content-none">
-                  <span className="flex items-start justify-between gap-4">
-                    {item.q}
-                    <span className="text-[var(--gold-ink)] group-open:rotate-45">+</span>
-                  </span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="scroll-mt-24 bg-background">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(16rem,0.85fr)] lg:gap-16 lg:py-28">
-          <div>
-            <p className="text-[0.72rem] tracking-[0.22em] text-muted-foreground uppercase">
-              {t.contact.eyebrow}
-            </p>
-            <h2 className="font-heading mt-4 text-3xl leading-tight tracking-tight sm:text-4xl">
-              {t.contact.title}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t.contact.intro}
-            </p>
-            <p className="mt-3 mb-8 text-sm text-muted-foreground">{t.contact.need}</p>
-            <ContactForm locale={locale} />
-          </div>
-          <aside className="h-fit rounded-2xl border border-border bg-[#f2f3ef] p-6 sm:p-8">
-            <h3 className="font-heading text-xl tracking-tight">
-              {t.contact.confidentialTitle}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t.contact.confidential}
-            </p>
-            <dl className="mt-8 space-y-4 text-sm">
-              <div>
-                <dt className="text-[0.65rem] tracking-[0.18em] text-muted-foreground uppercase">
-                  Email
-                </dt>
-                <dd className="mt-1">
-                  <a className="hover:underline" href={`mailto:${site.email}`}>
-                    {t.contact.general}
-                  </a>
-                </dd>
-                <dd className="mt-1">
-                  <a className="hover:underline" href={`mailto:${site.planEmail}`}>
-                    {t.contact.plans}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[0.65rem] tracking-[0.18em] text-muted-foreground uppercase">
-                  LinkedIn
-                </dt>
-                <dd className="mt-1">
-                  <a
-                    className="hover:underline"
-                    href={site.linkedin}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    linkedin.com/in/ortwinverreck
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </aside>
-        </div>
-      </section>
+      <ScrollBlock id="contact-details">
+        <section className={`${s.wrap} ${s.block} ${s.contact}`}>
+          <div className={s.textStack}><h2 className={s.sectionTitle}>Contact</h2><p>{nl ? "Heb je een vraag die niet in onze veelgestelde vragen staat? Of wil je eerst verkennen of Ormac bij je past voordat je een plan indient? Neem gerust contact op. We spreken je graag op een locatie bij jou in de buurt." : "Have a question that is not covered in our FAQ? Or would you like to explore whether Ormac is a good fit before submitting a plan? Feel free to get in touch. We are happy to meet you at a location near you."}</p></div>
+          <dl className={s.contactLinks}>
+            <dt>{nl ? "Plannen indienen" : "Submitting plans"}</dt><dd><Link href={planLink}>{nl ? "Via het formulier" : "Use the form"}</Link></dd>
+            <dt>{nl ? "Vragen via LinkedIn" : "Questions via LinkedIn"}</dt><dd><a href={site.linkedin} target="_blank" rel="noreferrer">Ortwin Verreck</a></dd>
+          </dl>
+        </section>
+      </ScrollBlock>
     </>
   );
 }
