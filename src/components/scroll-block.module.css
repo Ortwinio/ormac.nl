@@ -1,5 +1,5 @@
 .scene { position: relative; display: flow-root; scroll-margin-top: 92px; }
-.pin { display: flow-root; }
+.pin { position: relative; z-index: 1; display: flow-root; }
 .content { display: flow-root; background: var(--background); transform-origin: center top; }
 
 @media (prefers-reduced-motion: no-preference) {
