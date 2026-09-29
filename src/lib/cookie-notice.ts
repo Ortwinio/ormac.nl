@@ -6,6 +6,7 @@ export const cookieNotice = {
 } as const;
 
 export type Consent = "granted" | "denied" | "unset";
+let storageFailed = false;
 
 export function parseConsent(cookies: string, now = Date.now()): { choice: Consent; expires: number } {
   const value = cookies.split(";").map(part => part.trim()).find(part => part.startsWith(`${cookieNotice.name}=`))?.split("=")[1];
@@ -17,7 +18,13 @@ export function parseConsent(cookies: string, now = Date.now()): { choice: Conse
 }
 
 export function readConsent(): Consent {
-  return typeof document === "undefined" ? "unset" : parseConsent(document.cookie).choice;
+  if (storageFailed) return "unset";
+  return readStoredConsent().choice;
+}
+
+function readStoredConsent() {
+  try { return parseConsent(document.cookie); }
+  catch { return { choice: "unset" as const, expires: 0 }; }
 }
 
 export function subscribeConsent(callback: () => void) {
@@ -25,7 +32,7 @@ export function subscribeConsent(callback: () => void) {
   function changed() {
     clearTimeout(timer);
     callback();
-    const { expires } = parseConsent(document.cookie);
+    const { expires } = readStoredConsent();
     // Recheck at expiry, even if the visitor leaves a tab open for a long time.
     if (expires) timer = setTimeout(changed, Math.min(expires - Date.now() + 1, 2_147_483_647));
   }
@@ -47,10 +54,13 @@ export function subscribeConsent(callback: () => void) {
 
 export function saveConsent(choice: Exclude<Consent, "unset">) {
   const secure = window.location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${cookieNotice.name}=${cookieNotice.version}:${choice}:${Date.now()}; Path=/; Max-Age=${cookieNotice.maxAge}; SameSite=Lax${secure}`;
-  document.cookie = `ormac-cookie-notice=; Path=/; Max-Age=0${secure}`;
+  try {
+    document.cookie = `${cookieNotice.name}=${cookieNotice.version}:${choice}:${Date.now()}; Path=/; Max-Age=${cookieNotice.maxAge}; SameSite=Lax${secure}`;
+    document.cookie = `ormac-cookie-notice=; Path=/; Max-Age=0${secure}`;
+    storageFailed = readStoredConsent().choice !== choice;
+  } catch { storageFailed = true; }
   // Synchronous listeners stop Analytics before returning to the page.
   window.dispatchEvent(new Event(cookieNotice.event));
   try { localStorage.setItem(cookieNotice.event, String(Date.now())); } catch { /* Cookies still work when localStorage is unavailable. */ }
-  return readConsent() === choice;
+  return !storageFailed;
 }

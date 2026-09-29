@@ -34,7 +34,9 @@ export function getAnalytics() {
       window.gtag(...args);
     },
     disable: value => { window[`ga-disable-${analyticsId}`] = value; },
-    clearCookies: clearAnalyticsCookies,
+    clearCookies: () => {
+      try { clearAnalyticsCookies(); } catch { /* Collection is already disabled if browser storage is blocked. */ }
+    },
     clearQueue: () => { if (window.dataLayer) window.dataLayer.length = 0; },
     load: () => {
       if (document.getElementById("ormac-google-analytics")) return;

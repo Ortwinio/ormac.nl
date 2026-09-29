@@ -89,3 +89,25 @@ test('localhost, preview domains and missing or malformed IDs cannot send measur
   assert.equal(analyticsAllowed('G-54FCVYT04J', 'https://www.ormac.nl'), true);
   assert.equal(safePage('/private-person-name'), '/not-found');
 });
+
+test('blocked cookie writes fail closed even when an older grant is still readable', async () => {
+  const { readConsent, saveConsent } = await import('../src/lib/cookie-notice.ts');
+  const originalDocument = Object.getOwnPropertyDescriptor(globalThis, 'document');
+  const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  const browser = Object.assign(new EventTarget(), { location: { protocol: 'https:' } });
+  const jar = `${cookieNotice.name}=1:granted:${Date.now()}`;
+  Object.defineProperty(globalThis, 'document', { configurable: true, value: {
+    get cookie() { return jar; }, set cookie(_value: string) { throw new Error('Storage denied'); },
+  } });
+  Object.defineProperty(globalThis, 'window', { configurable: true, value: browser });
+  try {
+    assert.equal(readConsent(), 'granted');
+    assert.equal(saveConsent('denied'), false);
+    assert.equal(readConsent(), 'unset');
+  } finally {
+    if (originalDocument) Object.defineProperty(globalThis, 'document', originalDocument);
+    else Reflect.deleteProperty(globalThis, 'document');
+    if (originalWindow) Object.defineProperty(globalThis, 'window', originalWindow);
+    else Reflect.deleteProperty(globalThis, 'window');
+  }
+});
