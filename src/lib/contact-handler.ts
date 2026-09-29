@@ -158,13 +158,16 @@ export async function handleContact(request: Request, config: ContactConfig | nu
     if (typeof id !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)) fail("invalid");
     const fields = readFields(form);
     const attachments = await readAttachments(form);
-    const verification = await sendRequest("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ secret: config.secret, response: token }), signal: AbortSignal.timeout(10_000),
-    });
-    if (!verification.ok) fail("human", 503);
-    const result = await verification.json();
-    if (result.success !== true || result.action !== "contact" || result.hostname !== new URL(origin).hostname) fail("human", 403);
+    let result;
+    try {
+      const verification = await sendRequest("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: config.secret, response: token }), signal: AbortSignal.timeout(10_000),
+      });
+      if (!verification.ok) fail("human", 403);
+      result = await verification.json();
+    } catch { fail("human", 403); }
+    if (result?.success !== true || result.action !== "contact" || result.hostname !== new URL(origin).hostname) fail("human", 403);
     if (limited(fields.email)) fail("rate", 429);
     const payload = {
       from: config.from, to: ["plan@ormac.nl"], reply_to: fields.email,

@@ -189,7 +189,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         {step === 3 && !success && <div className={s.humanCheck}>
           <h3>{t.humanTitle}</h3><p className={s.formNote}>{t.humanNote}</p>
           {!service ? <p role="status">{t.checking}</p> : service.ready && service.siteKey ? <>
-            <HumanCheck key={checkAttempt} locale={locale} siteKey={service.siteKey} onToken={setToken} />
+            <HumanCheck resetKey={checkAttempt} locale={locale} siteKey={service.siteKey} onToken={setToken} />
             <button type="button" className={s.checkRetry} disabled={sending} onClick={() => { setToken(""); setCheckAttempt(attempt => attempt + 1); }}>{t.retryHuman}</button>
           </> : <p>{t.errors.unavailable}</p>}
         </div>}

@@ -21,12 +21,12 @@ The dev server binds to **http://127.0.0.1:43127**.
 
 The language toggle keeps the same section hash (`#founders`, `#contact`, …) and stores the choice in an `ormac-lang` cookie. There is no redirect from browser language or location. Crawlers always see Dutch at `/`.
 
-The contact form sends all four steps and PDF/Excel attachments to **plan@ormac.nl** through Resend, using the applicant’s email as Reply-To. It includes the selected language. Cloudflare Turnstile is validated on the server (including hostname and action) before sending. Missing configuration, invalid/expired/replayed tokens and provider failures cannot show a successful submission.
+The contact form sends all four steps and PDF/Excel attachments from **Ormac <plan@notifications.ormac.nl>** to **plan@ormac.nl** through Resend, using the applicant’s email as Reply-To. The sender is configured with `CONTACT_FROM_EMAIL` on the server; these addresses are not displayed on the website. It includes the selected language. Cloudflare Turnstile is validated on the server (including hostname and action) before sending. Missing configuration, invalid/expired/replayed tokens and provider failures cannot show a successful submission.
 
 ### Enable form delivery
 
 1. Copy `.env.example` to `.env.local` and enter `RESEND_API_KEY`, a verified `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`. Keep keys out of chat and git.
-2. Verify the sending domain in Resend. Create a **Managed** Turnstile widget for `ormac.nl` and `www.ormac.nl`, with **pre-clearance disabled**. For local delivery testing, use a separate real widget allowing `localhost` and `127.0.0.1`.
+2. Verify `notifications.ormac.nl` in Resend and ensure the API key has sending permission for that subdomain. Set `CONTACT_FROM_EMAIL` to `Ormac <plan@notifications.ormac.nl>`. The existing Turnstile widget uses public site key `0x4AAAAAAFIuN064zOEU1BJW`; use its matching secret as `TURNSTILE_SECRET_KEY` and preserve its dashboard settings. Check that the widget permits the website hostnames `ormac.nl` and `www.ormac.nl`. Local testing also needs an allowed local hostname; production origins must never allow localhost.
 3. Set `CONTACT_ALLOWED_ORIGINS` to the exact public origin(s). Development additionally allows localhost/127.0.0.1 on ports 43127 and 43129. Restart the server after setting variables. The site key is provided by an uncached configuration endpoint; secrets remain on the server.
 4. Submit a clearly labelled test application and confirm it arrives in plan@ormac.nl. A provider acceptance response is not proof of inbox delivery; inspect Resend delivery/bounce status if needed.
 

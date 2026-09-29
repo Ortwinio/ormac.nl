@@ -10,13 +10,16 @@ type Turnstile = {
     callback: (token: string) => void;
     "expired-callback": () => void; "error-callback": () => void; "timeout-callback": () => void;
   }) => string;
+  reset: (id: string) => void;
   remove: (id: string) => void;
 };
 
 declare global { interface Window { turnstile?: Turnstile } }
 
-export function HumanCheck({ siteKey, locale, onToken }: { siteKey: string; locale: Locale; onToken: (token: string) => void }) {
+export function HumanCheck({ siteKey, locale, onToken, resetKey }: { siteKey: string; locale: Locale; onToken: (token: string) => void; resetKey: number }) {
   const container = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+  const lastResetKey = useRef(resetKey);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -30,8 +33,16 @@ export function HumanCheck({ siteKey, locale, onToken }: { siteKey: string; loca
       "error-callback": () => { onToken(""); setFailed(true); },
       "timeout-callback": () => { onToken(""); setFailed(true); },
     });
-    return () => { api.remove(id); onToken(""); };
+    widgetId.current = id;
+    return () => { widgetId.current = null; api.remove(id); onToken(""); };
   }, [ready, siteKey, locale, onToken]);
+
+  useEffect(() => {
+    if (lastResetKey.current === resetKey) return;
+    lastResetKey.current = resetKey;
+    onToken("");
+    if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
+  }, [resetKey, onToken]);
 
   return <div>
     <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" onReady={() => setReady(true)} onError={() => { setFailed(true); onToken(""); }} />

@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 import { contactConfig, handleContact, type ContactConfig } from "../src/lib/contact-handler.ts";
 import { contactLimits } from "../src/lib/contact-settings.ts";
 
-const config: ContactConfig = { apiKey: "mock-key", from: "Ormac <plan@ormac.nl>", siteKey: "mock-site", secret: "mock-secret", origins: ["https://ormac.nl"] };
+const config: ContactConfig = { apiKey: "mock-key", from: "Ormac <plan@notifications.ormac.nl>", siteKey: "mock-site", secret: "mock-secret", origins: ["https://ormac.nl"] };
 function application() {
   const data = new FormData();
   const fields = { taal: "nl", name: "Test applicant", company: "Test company", email: `${randomUUID()}@example.com`, stage: "seed", focus: "services", description: "Synthetic test application", round: "100000", amount: "25000", use: "Test milestone", investors: "No investors yet", board: "1", privacy: "on", "cf-turnstile-response": "mock-token", submissionId: randomUUID() };
@@ -34,6 +34,7 @@ test("valid application verifies first, then sends all fields and attachments to
   assert.equal(response.status, 200); assert.equal((await response.json()).ok, true);
   assert.equal(calls.length, 2); assert.match(calls[0].url, /siteverify$/);
   assert.deepEqual(calls[1].body.to, ["plan@ormac.nl"]);
+  assert.equal(calls[1].body.from, "Ormac <plan@notifications.ormac.nl>");
   assert.equal(calls[1].body.reply_to, data.get("email"));
   assert.match(String(calls[1].body.text), /Language:\nen/);
   assert.match(String(calls[1].body.text), /Synthetic urgency/);
@@ -49,11 +50,48 @@ for (const [name, verification] of Object.entries({
   rejected: { success: false }, expired: { success: false, "error-codes": ["timeout-or-duplicate"] },
   wrongHostname: { success: true, hostname: "evil.example", action: "contact" },
   wrongAction: { success: true, hostname: "ormac.nl", action: "login" },
+  nonBooleanSuccess: { success: "true", hostname: "ormac.nl", action: "contact" },
 })) test(`${name} human check never sends email`, async () => {
   const { calls, fetcher } = providers(verification);
   const response = await handleContact(request(), config, fetcher);
   assert.equal(response.status, 403); assert.equal((await response.json()).error, "human");
   assert.equal(calls.length, 1);
+});
+
+test("unavailable or malformed Siteverify fails closed with a human-check error", async () => {
+  for (const outcome of ["network", "http", "json", "null"]) {
+    let calls = 0;
+    const fetcher: typeof fetch = async input => {
+      calls++;
+      assert.match(String(input), /siteverify$/);
+      if (outcome === "network") throw new Error("private network details");
+      if (outcome === "http") return new Response("private upstream details", { status: 503 });
+      if (outcome === "json") return new Response("invalid json");
+      return Response.json(null);
+    };
+    const response = await handleContact(request(), config, fetcher);
+    assert.equal(response.status, 403);
+    assert.deepEqual(await response.json(), { ok: false, error: "human" });
+    assert.equal(calls, 1);
+  }
+});
+
+test("a replay rejected by Siteverify cannot send a second email", async () => {
+  const data = application();
+  const accepted = providers();
+  assert.equal((await handleContact(request(data), config, accepted.fetcher)).status, 200);
+  const replayed = providers({ success: false, "error-codes": ["timeout-or-duplicate"] });
+  const response = await handleContact(request(data), config, replayed.fetcher);
+  assert.equal(response.status, 403);
+  assert.equal(replayed.calls.length, 1);
+});
+
+test("oversized Turnstile tokens never reach providers", async () => {
+  const data = application();
+  data.set("cf-turnstile-response", "x".repeat(2049));
+  const { calls, fetcher } = providers();
+  assert.equal((await handleContact(request(data), config, fetcher)).status, 403);
+  assert.equal(calls.length, 0);
 });
 
 for (const field of ["cf-turnstile-response", "email", "name", "company", "round", "amount", "privacy", "criterion-5", "deck", "financial"]) {
@@ -118,7 +156,8 @@ test("4 MB of attachments fits the Vercel request budget and one extra byte is r
 });
 
 test("production configuration allows exact public origins without localhost", () => {
-  const env = { NODE_ENV: "production", RESEND_API_KEY: "mock", CONTACT_FROM_EMAIL: "plan@ormac.nl", TURNSTILE_SITE_KEY: "mock-site", TURNSTILE_SECRET_KEY: "mock-secret" };
+  const env = { NODE_ENV: "production", RESEND_API_KEY: "mock", CONTACT_FROM_EMAIL: "Ormac <plan@notifications.ormac.nl>", TURNSTILE_SITE_KEY: "mock-site", TURNSTILE_SECRET_KEY: "mock-secret" };
+  assert.equal(contactConfig(env)?.from, "Ormac <plan@notifications.ormac.nl>");
   assert.deepEqual(contactConfig(env)?.origins, ["https://ormac.nl", "https://www.ormac.nl"]);
   assert.deepEqual(contactConfig({ ...env, CONTACT_ALLOWED_ORIGINS: " https://preview.example.com " })?.origins, ["https://preview.example.com"]);
 });
@@ -158,7 +197,7 @@ test("repeated verified attempts are rate limited", async () => {
 
 test("missing configuration fails closed and public test keys cannot enable live sending", async () => {
   assert.equal(contactConfig({}), null);
-  assert.equal(contactConfig({ RESEND_API_KEY: "mock", CONTACT_FROM_EMAIL: "plan@ormac.nl", TURNSTILE_SITE_KEY: "1x00000000000000000000AA", TURNSTILE_SECRET_KEY: "mock" }), null);
+  assert.equal(contactConfig({ RESEND_API_KEY: "mock", CONTACT_FROM_EMAIL: "Ormac <plan@notifications.ormac.nl>", TURNSTILE_SITE_KEY: "1x00000000000000000000AA", TURNSTILE_SECRET_KEY: "mock" }), null);
   const { calls, fetcher } = providers();
   assert.equal((await handleContact(request(), null, fetcher)).status, 503); assert.equal(calls.length, 0);
 });

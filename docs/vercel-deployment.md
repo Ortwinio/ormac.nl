@@ -23,13 +23,19 @@ Add these in **Project Settings → Environment Variables**, scoped to **Product
 
 | Variable | Value |
 | --- | --- |
-| `RESEND_API_KEY` | Resend API key with permission to send from the verified domain |
-| `CONTACT_FROM_EMAIL` | `Ormac <plan@ormac.nl>` after verifying `ormac.nl` in Resend |
-| `TURNSTILE_SITE_KEY` | Site key for the production Managed widget |
+| `RESEND_API_KEY` | Resend API key with sending permission for `notifications.ormac.nl` |
+| `CONTACT_FROM_EMAIL` | `Ormac <plan@notifications.ormac.nl>` after verifying `notifications.ormac.nl` in Resend |
+| `TURNSTILE_SITE_KEY` | `0x4AAAAAAFIuN064zOEU1BJW` (existing widget, public) |
 | `TURNSTILE_SECRET_KEY` | Matching secret key |
 | `CONTACT_ALLOWED_ORIGINS` | `https://ormac.nl,https://www.ormac.nl` |
 
-Create a Cloudflare Turnstile **Managed** widget with `ormac.nl` and `www.ormac.nl` allowed and **pre-clearance disabled**. The server checks both hostname and the `contact` action. Public testing keys cannot enable delivery. The recipient remains `plan@ormac.nl` on the server; the public website does not display it.
+Use the existing Cloudflare Turnstile widget above; do not create a replacement or change its clearance settings. Confirm its allowed hostnames cover `ormac.nl` and `www.ormac.nl`. Use the website hostnames here, not the email subdomain `notifications.ormac.nl`. The server checks both hostname and the `contact` action. Public testing keys cannot enable delivery. The recipient remains `plan@ormac.nl` on the server; the public website does not display it.
+
+The site key is installed in `.env.example` and the local configuration, but the matching secret must be stored directly in ignored `.env.local` or Vercel as `TURNSTILE_SECRET_KEY` (the existing project binding). Never paste it into chat. The frontend explicitly retains and resets its widget after each submission attempt and when Retry is clicked. Siteverify timeouts, malformed replies, invalid tokens, wrong actions and wrong hostnames all block delivery.
+
+The [Turnstile Spin existing-widget flow](https://developers.cloudflare.com/turnstile/spin/prompt.md) requires an approved absolute Wrangler executable outside this repository (4.109+), an exact version and account ID, and explicit confirmation of the secret write manifest before automatic retrieval. Without that setup, store the secret directly through the platform settings. Live validation remains pending until a fresh real token succeeds through `/api/contact/` and replaying it is rejected. Unit tests mock Siteverify and do not establish live widget configuration or secret validity.
+
+Changing `.env.example` or `.env.local` does not change Vercel settings. Replace any old `CONTACT_FROM_EMAIL=Ormac <plan@ormac.nl>` value in the Production environment, then redeploy. The handler reads this setting at runtime, so no hard-coded sender change is required. Keep the existing receiving mail setup for `ormac.nl`; Resend only needs Sending enabled for `notifications.ormac.nl`.
 
 All four service settings must be present before the form enables sending. `/api/contact/` exposes only readiness and the public widget site key; readiness confirms configuration is present, not that credentials or delivery work. Redeploy after changing environment variables.
 
