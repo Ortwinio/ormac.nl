@@ -36,7 +36,17 @@ Uploads are limited to 5 non-empty PDF/XLS/XLSX documents and 4 MB total (4,000,
 
 Resend idempotency keys prevent duplicate email sends on retries of an unchanged application. A supplementary per-process limit allows five attempts per email address per 15 minutes. For multi-instance production hosting, use a shared rate-limit store or edge rule. No application contents, attachments or API credentials are logged or stored in a website database.
 
-The bilingual privacy statement and cookie information are available from the footer. The informational cookie banner uses `ormac-cookie-notice` to remember dismissal for 180 days and can be reopened from the footer. There are no analytics or advertising trackers. Update the privacy copy when enabling form delivery or changing data processing; increment the notice version in `src/lib/cookie-notice.ts` when visitors need to see an updated notice.
+The bilingual privacy statement and cookie settings are available from every footer. The consent banner has equally prominent accept/reject actions, optional preferences, and withdrawal. `ormac-cookie-consent` remembers the choice for 180 days; old informational acknowledgements are not consent. Cookie choices sync across same-origin tabs and expire even in an open tab.
+
+### Google Analytics
+
+GA4 property **G-54FCVYT04J** is configured in `src/lib/analytics-core.ts`; an optional build-time `NEXT_PUBLIC_GA_MEASUREMENT_ID` overrides it (blank disables Analytics). No Google script, preconnect or measurement is loaded before analytics consent. This implements basic Consent Mode with advertising consent denied. Google Signals and ad personalisation are disabled; withdrawing consent sets Google’s disable flag, clears queued measurements and removes Analytics cookies without reloading or losing form entries.
+
+Only `https://ormac.nl` and `https://www.ormac.nl` may collect data, so local development and Vercel previews do not pollute reports. The site sends manual `page_view` events on public route changes and `generate_lead` only after a successful email-service response, with a fixed form name and language. Form entries, references and attachments are never passed to these events. URLs are restricted to known public paths, with query strings and fragments removed. GA cookies are host-only with a non-renewing 180-day lifetime.
+
+**Google Analytics admin setup (29 September 2026):** Enhanced Measurement is disabled for web stream `10055678257` in property `470426125`, to avoid duplicate or unintended automatic events. User and event retention are set to 2 months with reset on new activity off. User-provided data collection is off. Keep these settings aligned with the privacy statement; the retention setting does not cover aggregated standard reports. Google Signals and ad personalisation are disabled by the website configuration. Review Google’s data-processing terms and account data-sharing settings. Mark `generate_lead` as a key event if desired. The public Measurement ID does not grant access to these account settings.
+
+Check Realtime after a consented production visit. Denied visits intentionally will not appear, and ad blockers can block allowed visits. No consent choice may be treated as evidence of inbox delivery. Automated Analytics tests use a fake adapter and never contact Google.
 
 ## Vercel deployment
 
@@ -51,6 +61,6 @@ npm start -- --port 43127
 
 ## Brand assets
 
-Content sections on both language versions, the privacy pages and the 404 page use `ScrollBlock` for native sticky positioning and a scroll-linked fade. Tall sections remain readable before pinning; section anchors remain on the outer wrapper. Measurements update when form steps, FAQ panels or viewport dimensions change. Reduced-motion preferences and print layouts use the normal document flow, and focused content remains opaque. The footer and cookie notice stay outside the animation.
+Content sections on both language versions, the privacy pages and the 404 page use `ScrollBlock` for native sticky positioning and a scroll-linked fade. Tall sections remain readable before pinning; section anchors remain on the outer wrapper. Measurements update when form steps, FAQ panels or viewport dimensions change. Reduced-motion preferences and print layouts use the normal document flow, and focused content remains opaque. The contact form, footer and cookie banner stay outside the animation so later blocks cannot cover interactive controls.
 
 Marks, favicons, photography and illustrations live in `public/brand` and `public/images`, copied from Ortwin’s local brand folders (Documents/Ormac BV and Downloads).

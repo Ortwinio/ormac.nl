@@ -29,6 +29,11 @@ export const privacyCopy = {
       { id: "email", title: "E-mailverzending", paragraphs: [
         "Resend verwerkt de inhoud en bijlagen van je aanvraag om de e-mail af te leveren."
       ] },
+      { id: "analytics", title: "Google Analytics: alleen met toestemming", paragraphs: [
+        "Met jouw toestemming gebruiken we Google Analytics 4 van Google om te begrijpen hoe onze website wordt gebruikt en waar we deze kunnen verbeteren. We meten bezochte pagina’s en het aantal succesvol verstuurde plannen, met de taalversie. Google verwerkt daarbij een cookie-identificatie en technische gegevens, zoals browser- en apparaatinformatie. Bij de verbinding met Google wordt ook je IP-adres verwerkt. Dit zijn geen anonieme gegevens.",
+        "De grondslag is jouw toestemming. Voor je toestemming geeft en als je weigert, laden we Google Analytics niet en sturen we er geen meetgegevens naartoe. Advertentiepersonalisatie en Google Signals staan in onze integratie uit. We sturen geen namen, e-mailadressen, formulierinhoud, financiële gegevens, bijlagen of aanvraagreferenties naar Analytics. Onze paginametingen bevatten geen URL-queryparameters of ankers.",
+        "Google kan gegevens buiten de EER verwerken, onder meer in de Verenigde Staten. De paragraaf over verwerking buiten de EER is ook hierop van toepassing. Analytische cookies blijven maximaal 180 dagen bestaan. De bewaartermijn voor gebruikers- en gebeurtenisgegevens in Google Analytics is ingesteld op 2 maanden, zonder verlenging bij nieuwe activiteit. Deze instelling geldt niet voor geaggregeerde standaardrapporten. Je kunt Ormac vragen om informatie over verwijdering van jouw gegevens. Intrekken van toestemming stopt toekomstige metingen, maar verwijdert niet automatisch al verzamelde gegevens."
+      ] },
       { id: "buiten-eer", title: "Verwerking buiten de EER", paragraphs: [
         "Bij het gebruik van internationale dienstverleners kan verwerking buiten de Europese Economische Ruimte aan de orde zijn. Een dergelijke doorgifte mag alleen plaatsvinden met een geldige waarborg, bijvoorbeeld een adequaatheidsbesluit of goedgekeurde standaardcontractbepalingen en, waar nodig, aanvullende maatregelen. Je kunt via de contactmogelijkheden op deze website informatie vragen over de dienstverleners, locaties en waarborgen die op jouw gegevens van toepassing zijn."
       ] },
@@ -38,13 +43,15 @@ export const privacyCopy = {
       ] },
     ],
     cookiesTitle: "Cookies op deze website",
-    cookiesIntro: "We gebruiken alleen functionele cookies. Er zijn geen analytische cookies, advertentiecookies of ingesloten sociale-mediatrackers. Beide cookies worden door deze website zelf geplaatst.",
+    cookiesIntro: "Functionele cookies zijn nodig voor je taalvoorkeur en cookiekeuze. Google Analytics en de analytische cookies hieronder worden alleen geactiveerd na jouw toestemming. We gebruiken geen advertentiecookies of ingesloten sociale-mediatrackers.",
     cookiePurpose: "Doel", cookieDuration: "Bewaartermijn",
     languagePurpose: "Onthoudt de laatst bezochte taalversie (Nederlands of Engels), zodat de website je taalvoorkeur kan gebruiken.",
     languageDuration: "1 jaar na het instellen of vernieuwen van de taalvoorkeur.",
-    noticePurpose: "Onthoudt dat je de cookiemelding hebt gesloten, zodat deze niet bij ieder bezoek terugkomt. Dit is geen toestemming voor tracking.",
-    noticeDuration: "180 dagen na het sluiten van de melding.",
-    cookieControls: "Via ‘Cookie-informatie’ in de footer kun je de melding opnieuw openen. Je kunt cookies ook verwijderen of blokkeren in je browser. De website blijft bereikbaar; je taalvoorkeur wordt dan mogelijk niet onthouden en de melding kan opnieuw verschijnen.",
+    noticePurpose: "Onthoudt of je analytische cookies toestaat of weigert, inclusief het tijdstip en de versie van je keuze. Een eerdere melding sluiten geldt niet als toestemming.",
+    noticeDuration: "180 dagen na het opslaan van je keuze.",
+    analyticsPurpose: "_ga onderscheidt browserbezoeken met een willekeurig gegenereerde code. _ga_* bewaart sessie-informatie. Deze cookies worden alleen geplaatst als je analytics toestaat.",
+    analyticsDuration: "Maximaal 180 dagen vanaf het plaatsen; uit deze browser verwijderd zodra je via Cookie-instellingen je toestemming intrekt.",
+    cookieControls: "Kies ‘Alleen noodzakelijk’ om analytics te weigeren of ‘Analytics toestaan’ om toestemming te geven. Via ‘Cookie-instellingen’ in de footer kun je je keuze even eenvoudig wijzigen of intrekken. Intrekken stopt verdere metingen en verwijdert de Analytics-cookies van deze website; gegevens die al naar Google zijn verstuurd worden daardoor niet automatisch verwijderd. De website en het contactformulier werken bij beide keuzes. Je kunt cookies ook verwijderen of blokkeren in je browser.",
     contactTitle: "Vragen en wijzigingen",
     contact: "Heb je vragen over je gegevens? Neem contact met ons op via de contactmogelijkheden op deze website. Als de website of onze verwerking verandert, passen we deze verklaring aan. De datum bovenaan geeft aan wanneer de tekst voor het laatst is bijgewerkt.",
     authority: "Autoriteit Persoonsgegevens",
@@ -76,6 +83,11 @@ export const privacyCopy = {
       { id: "email", title: "Email delivery", paragraphs: [
         "Resend processes your application content and attachments to deliver the email."
       ] },
+      { id: "analytics", title: "Google Analytics: only with your consent", paragraphs: [
+        "With your consent, we use Google Analytics 4, provided by Google, to understand how our website is used and where it can be improved. We measure page visits and the number of successfully submitted plans, including the language version. Google processes a cookie identifier and technical information such as browser and device details. Your IP address is also processed when connecting to Google. This is not anonymous data.",
+        "The legal basis is your consent. Before you consent, or if you refuse, we do not load Google Analytics or send measurement data to it. Advertising personalisation and Google Signals are disabled in our integration. We do not send names, email addresses, form contents, financial information, attachments or application references to Analytics. Our page measurements exclude URL query parameters and fragments.",
+        "Google may process data outside the EEA, including in the United States. The section on processing outside the EEA also applies here. Analytics cookies last up to 180 days. Google Analytics user and event data retention is set to 2 months, without renewal on new activity. This setting does not apply to aggregated standard reports. You can ask Ormac for information about deletion of your data. Withdrawing consent stops future measurement but does not automatically delete data already collected."
+      ] },
       { id: "outside-eea", title: "Processing outside the EEA", paragraphs: [
         "Using international service providers may involve processing outside the European Economic Area. Such transfers may take place only with a valid safeguard, such as an adequacy decision or approved standard contractual clauses and additional measures where needed. Use the contact options on this website for information about the providers, locations and safeguards applicable to your data."
       ] },
@@ -85,13 +97,15 @@ export const privacyCopy = {
       ] },
     ],
     cookiesTitle: "Cookies on this website",
-    cookiesIntro: "We use only functional cookies. There are no analytics cookies, advertising cookies or embedded social-media trackers. Both cookies are set by this website itself.",
+    cookiesIntro: "Necessary cookies remember your language and cookie choice. Google Analytics and the analytics cookies below are activated only with your consent. We do not use advertising cookies or embedded social-media trackers.",
     cookiePurpose: "Purpose", cookieDuration: "Lifetime",
     languagePurpose: "Remembers the last language version visited (Dutch or English), so the website can use your language preference.",
     languageDuration: "1 year after the language preference is set or renewed.",
-    noticePurpose: "Remembers that you dismissed the cookie notice so it does not appear on every visit. This does not give consent to tracking.",
-    noticeDuration: "180 days after you dismiss the notice.",
-    cookieControls: "Use ‘Cookie information’ in the footer to reopen the notice. You can also delete or block cookies in your browser. The website remains accessible; your language preference may no longer be remembered and the notice may reappear.",
+    noticePurpose: "Remembers whether you allow or refuse analytics cookies, including the time and version of your choice. Dismissing the previous notice does not count as consent.",
+    noticeDuration: "180 days after saving your choice.",
+    analyticsPurpose: "_ga distinguishes browser visits using a randomly generated identifier. _ga_* maintains session information. These cookies are set only after you allow analytics.",
+    analyticsDuration: "Up to 180 days from creation; removed from this browser when you withdraw consent through Cookie settings.",
+    cookieControls: "Choose ‘Necessary only’ to refuse analytics, or ‘Allow analytics’ to consent. Use ‘Cookie settings’ in the footer to change your choice or withdraw consent just as easily. Withdrawing stops further measurement and removes this website’s Analytics cookies; it does not automatically erase data already sent to Google. The website and contact form work with either choice. You can also remove or block cookies in your browser.",
     contactTitle: "Questions and updates",
     contact: "For questions about your data, please use the contact options on this website. We update this statement when the website or our processing changes. The date above shows when this text was last updated.",
     authority: "Dutch Data Protection Authority",

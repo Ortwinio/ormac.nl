@@ -6,6 +6,7 @@ import { copy } from "@/lib/copy";
 import { planFormCopy } from "@/lib/copy/plan-form";
 import type { Locale } from "@/lib/i18n";
 import { contactLimits, documentExtensions } from "@/lib/contact-settings";
+import { trackPlanSent } from "@/lib/analytics";
 import s from "./ormac.module.css";
 
 type Validatable = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -57,6 +58,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         const fieldStep = Number(field.closest("[data-step]")?.getAttribute("data-step"));
         if (fieldStep !== step) { invalidField.current = field; go(fieldStep); }
         else field.reportValidity();
+        setError("invalid");
         return false;
       }
     }
@@ -89,6 +91,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       focusAfterChange.current = true;
       setReference(submissionId.current);
       setSuccess(true);
+      trackPlanSent(locale);
     } catch { setError("delivery"); }
     finally {
       inFlight.current = false;
@@ -117,6 +120,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       <input type="hidden" name="taal" value={locale} />
       <div className={s.honeypot} aria-hidden="true"><label>Company fax<input name="companyFax" tabIndex={-1} autoComplete="off" /></label></div>
       {!success && service && !service.ready && <p role="status" className={s.formError}>{t.errors.unavailable}</p>}
+      <p className={s.formNote} hidden={success}>{locale === "nl" ? "Velden met * zijn verplicht. Je invoer blijft bewaard wanneer je naar een vorige stap gaat." : "Fields marked * are required. Your entries are kept when you return to a previous step."}</p>
       <ol className={s.stepper} aria-label={locale === "nl" ? "Stappen" : "Steps"} hidden={success}>
         {t.steps.map((label, index) => <li key={label} aria-current={index === step ? "step" : undefined} className={index < step ? s.stepDone : undefined}>{index + 1} {label}</li>)}
       </ol>

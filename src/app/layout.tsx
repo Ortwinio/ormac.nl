@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { Schibsted_Grotesk, Source_Sans_3 } from "next/font/google";
 import { hreflangUrls } from "@/lib/i18n";
 import { localeMetadata } from "@/lib/metadata";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -38,6 +39,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );

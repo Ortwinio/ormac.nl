@@ -19,7 +19,7 @@ The repository supplies these settings:
 
 ## Production environment variables
 
-Add these in **Project Settings → Environment Variables**, scoped to **Production**. Use `.env.example` as the template; never upload `.env.local` or put secrets in Git or `vercel.json`. None of these names needs a `NEXT_PUBLIC_` prefix.
+Add these in **Project Settings → Environment Variables**, scoped to **Production**. Use `.env.example` as the template; never upload `.env.local` or put secrets in Git or `vercel.json`. The email variables must remain server-only; never give them a `NEXT_PUBLIC_` prefix.
 
 | Variable | Value |
 | --- | --- |
@@ -34,6 +34,12 @@ Changing `.env.example` or `.env.local` does not change Vercel settings. Replace
 Both email settings must be present before the form enables sending. `/api/contact/` exposes only readiness; readiness confirms configuration is present, not that credentials or delivery work. Redeploy after changing environment variables.
 
 Keep delivery credentials absent from Preview deployments by default; the website can be reviewed with submission disabled. For a deliberate live preview test, configure all variables for that environment, allow its exact HTTPS origin. Preview sends still go to the real recipient. Do not allow wildcard preview origins. Vercel sets `X-Robots-Tag: noindex` on Preview deployments by default; retain this behavior.
+
+## Analytics and consent
+
+The owner-provided public GA4 ID `G-54FCVYT04J` is the default; no Vercel secret is needed. An optional `NEXT_PUBLIC_GA_MEASUREMENT_ID` build-time override can replace it, or disable Analytics when empty. Rebuild after changing it. Consent and the production-origin allowlist are required even when the ID is present.
+
+Google Analytics property settings were aligned on 29 September 2026 as recorded in README: Enhanced Measurement off, user-provided data off, and two-month user/event retention without renewal. Keep these settings aligned with the privacy statement. Test a new visit, refusal, acceptance, route changes, and withdrawal from the footer. Confirm that no Google script loads for a refused visit and that a consented visit appears in Realtime. Check the privacy pages in both languages.
 
 ## Domains and delivery
 

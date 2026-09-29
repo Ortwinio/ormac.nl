@@ -243,3 +243,5 @@
   .stats span { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .routePath { animation: none; } }
+
+.formStep > legend, .field input, .field select, .field textarea, .radios input, .formCheck input { scroll-margin-top: 100px; }

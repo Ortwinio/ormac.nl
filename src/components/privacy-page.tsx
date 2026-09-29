@@ -37,6 +37,7 @@ export function PrivacyPageContent({ locale }: { locale: Locale }) {
             <section aria-labelledby={`${section.id}-title`}>
               <h2 id={`${section.id}-title`}>{section.title}</h2>
               {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              {section.id === "analytics" && <p><a href="https://policies.google.com/privacy">Google privacy</a> · <a href="https://policies.google.com/technologies/partner-sites">{locale === "nl" ? "Hoe Google gegevens gebruikt" : "How Google uses data"}</a></p>}
               {section.id === "email" && <p><a href="https://resend.com/legal/privacy-policy">Resend privacy</a></p>}
               {(section.id === "rights" || section.id === "rechten") && <p>{contactLink} · <a href="https://www.autoriteitpersoonsgegevens.nl/">{t.authority}</a></p>}
             </section>
@@ -47,7 +48,7 @@ export function PrivacyPageContent({ locale }: { locale: Locale }) {
             <h2 id="cookies-title">{t.cookiesTitle}</h2>
             <p>{t.cookiesIntro}</p>
             <div className={styles.cookieList}>
-              {[{name: localeCookie, purpose: t.languagePurpose, duration: t.languageDuration}, {name: cookieNotice.name, purpose: t.noticePurpose, duration: t.noticeDuration}].map(cookie => (
+              {[{name: localeCookie, purpose: t.languagePurpose, duration: t.languageDuration}, {name: cookieNotice.name, purpose: t.noticePurpose, duration: t.noticeDuration}, {name: "_ga / _ga_*", purpose: t.analyticsPurpose, duration: t.analyticsDuration}].map(cookie => (
                 <div className={styles.cookie} key={cookie.name}>
                   <h3>{cookie.name}</h3>
                   <dl><dt>{t.cookiePurpose}</dt><dd>{cookie.purpose}</dd><dt>{t.cookieDuration}</dt><dd>{cookie.duration}</dd></dl>

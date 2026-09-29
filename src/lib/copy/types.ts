@@ -26,6 +26,8 @@ export type Copy = {
     languageDuration: string;
     noticePurpose: string;
     noticeDuration: string;
+    analyticsPurpose: string;
+    analyticsDuration: string;
     cookieControls: string;
     contactTitle: string;
     contact: string;
