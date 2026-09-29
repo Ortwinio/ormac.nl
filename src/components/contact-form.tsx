@@ -18,7 +18,6 @@ export function ContactForm({ locale }: { locale: Locale }) {
   const [description, setDescription] = useState("");
   const [urgent, setUrgent] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [reference, setReference] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<keyof typeof t.errors | null>(null);
   const [service, setService] = useState<{ ready: boolean } | null>(null);
@@ -89,7 +88,6 @@ export function ContactForm({ locale }: { locale: Locale }) {
         return;
       }
       focusAfterChange.current = true;
-      setReference(submissionId.current);
       setSuccess(true);
       trackPlanSent(locale);
     } catch { setError("delivery"); }
@@ -186,10 +184,10 @@ export function ContactForm({ locale }: { locale: Locale }) {
       </fieldset>
 
       {error && <p role="alert" className={s.formError}>{t.errors[error]}</p>}
-      <div hidden={!success} className={s.formPreview} data-success tabIndex={-1}>
+      {success && <div className={s.formPreview} data-success tabIndex={-1}>
         <h3>{t.successTitle}</h3><p className={s.previewNote}>{t.successNote}</p>
-        <p>{t.reference}: <strong>{reference}</strong></p>
-      </div>
+        <p>{t.successContact} <a href="mailto:plan@ormac.nl">plan@ormac.nl</a>.</p>
+      </div>}
       <div className={s.formNav} hidden={success}>
         <span className={s.formNote}>{t.confidential}</span>
         <div>
