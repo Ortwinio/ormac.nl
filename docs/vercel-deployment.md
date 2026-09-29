@@ -15,7 +15,7 @@ The repository supplies these settings:
 | Function region | Frankfurt (`fra1`) |
 | Contact function duration | 60 seconds |
 
-`npm run check` runs ESLint and contact-handler tests with mocked providers; it never sends email. `npm run build` uses Webpack. The language routing uses Next.js 16's `src/proxy.ts`; API and static assets bypass it. The function region controls application execution, not the storage locations of Resend or Cloudflare.
+`npm run check` runs ESLint and contact-handler tests with mocked providers; it never sends email. `npm run build` uses Webpack. The language routing uses Next.js 16's `src/proxy.ts`; API and static assets bypass it. The function region controls application execution, not the storage locations of Resend.
 
 ## Production environment variables
 
@@ -25,21 +25,15 @@ Add these in **Project Settings → Environment Variables**, scoped to **Product
 | --- | --- |
 | `RESEND_API_KEY` | Resend API key with sending permission for `notifications.ormac.nl` |
 | `CONTACT_FROM_EMAIL` | `Ormac <plan@notifications.ormac.nl>` after verifying `notifications.ormac.nl` in Resend |
-| `TURNSTILE_SITE_KEY` | `0x4AAAAAAFIuN064zOEU1BJW` (existing widget, public) |
-| `TURNSTILE_SECRET_KEY` | Matching secret key |
 | `CONTACT_ALLOWED_ORIGINS` | `https://ormac.nl,https://www.ormac.nl` |
 
-Use the existing Cloudflare Turnstile widget above; do not create a replacement or change its clearance settings. Confirm its allowed hostnames cover `ormac.nl` and `www.ormac.nl`. Use the website hostnames here, not the email subdomain `notifications.ormac.nl`. The server checks both hostname and the `contact` action. Public testing keys cannot enable delivery. The recipient remains `plan@ormac.nl` on the server; the public website does not display it.
-
-The site key is installed in `.env.example` and the local configuration, but the matching secret must be stored directly in ignored `.env.local` or Vercel as `TURNSTILE_SECRET_KEY` (the existing project binding). Never paste it into chat. The frontend explicitly retains and resets its widget after each submission attempt and when Retry is clicked. Siteverify timeouts, malformed replies, invalid tokens, wrong actions and wrong hostnames all block delivery.
-
-The [Turnstile Spin existing-widget flow](https://developers.cloudflare.com/turnstile/spin/prompt.md) requires an approved absolute Wrangler executable outside this repository (4.109+), an exact version and account ID, and explicit confirmation of the secret write manifest before automatic retrieval. Without that setup, store the secret directly through the platform settings. Live validation remains pending until a fresh real token succeeds through `/api/contact/` and replaying it is rejected. Unit tests mock Siteverify and do not establish live widget configuration or secret validity.
+The form submits directly to the existing server handler without a CAPTCHA. The recipient remains `plan@ormac.nl` on the server; the public website does not display it.
 
 Changing `.env.example` or `.env.local` does not change Vercel settings. Replace any old `CONTACT_FROM_EMAIL=Ormac <plan@ormac.nl>` value in the Production environment, then redeploy. The handler reads this setting at runtime, so no hard-coded sender change is required. Keep the existing receiving mail setup for `ormac.nl`; Resend only needs Sending enabled for `notifications.ormac.nl`.
 
-All four service settings must be present before the form enables sending. `/api/contact/` exposes only readiness and the public widget site key; readiness confirms configuration is present, not that credentials or delivery work. Redeploy after changing environment variables.
+Both email settings must be present before the form enables sending. `/api/contact/` exposes only readiness; readiness confirms configuration is present, not that credentials or delivery work. Redeploy after changing environment variables.
 
-Keep delivery credentials absent from Preview deployments by default; the website can be reviewed with submission disabled. For a deliberate live preview test, configure all variables for that environment, allow its exact HTTPS origin and add its hostname to a separate real Turnstile widget. Preview sends still go to the real recipient. Do not allow wildcard preview origins. Vercel sets `X-Robots-Tag: noindex` on Preview deployments by default; retain this behavior.
+Keep delivery credentials absent from Preview deployments by default; the website can be reviewed with submission disabled. For a deliberate live preview test, configure all variables for that environment, allow its exact HTTPS origin. Preview sends still go to the real recipient. Do not allow wildcard preview origins. Vercel sets `X-Robots-Tag: noindex` on Preview deployments by default; retain this behavior.
 
 ## Domains and delivery
 
@@ -49,7 +43,7 @@ Canonical links, language alternatives, robots and sitemap already use `https://
 
 The form accepts up to five PDF/Excel documents with **4 MB total file content** (4,000,000 bytes). The server caps the complete multipart body at 4,250,000 bytes, leaving room below Vercel's 4.5 MB request limit. The pitch deck must be a PDF. Supporting larger files requires private direct-to-storage uploads; increasing this limit alone will not work on Vercel.
 
-Turnstile is the primary automated-submission check. The supplemental five-attempts-per-email limit is per process and can reset or differ across Vercel instances. It is not a global production quota. If a global limit is needed, configure a Vercel Firewall rule for POST `/api/contact/` (accounting for shared IPs) or add a shared rate-limit store.
+The hidden spam field and origin checks remain enabled. The five-attempts-per-email limit is per process and can reset or differ across Vercel instances. It is not a global production quota. If a global limit is needed, configure a Vercel Firewall rule for POST `/api/contact/` (accounting for shared IPs) or add a shared rate-limit store.
 
 ## Verification
 
@@ -64,12 +58,12 @@ npm run build
 After the production domain and credentials are configured:
 
 1. Open the Dutch and English home and privacy pages; check footer links, language switching, the cookie notice and the footer plan button.
-2. Check `/api/contact/` returns `ready: true` and the expected public site key, with no API secrets or recipient address.
-3. Submit a clearly labelled test application with small synthetic PDF/Excel documents. Complete the real human check and verify both the success message and receipt in `plan@ormac.nl`. Review Resend delivery/bounce status if mail is missing; API acceptance alone does not prove inbox delivery.
-4. Confirm files totaling more than 4 MB show the size error and that submission remains unavailable without a completed human check.
+2. Check `/api/contact/` returns `ready: true`, with no API secrets or recipient address.
+3. Submit a clearly labelled test application with small synthetic PDF/Excel documents. Verify both the success message and receipt in `plan@ormac.nl`. Review Resend delivery/bounce status if mail is missing; API acceptance alone does not prove inbox delivery.
+4. Confirm files totaling more than 4 MB show the size error and that incomplete required fields prevent submission.
 5. Check `/robots.txt`, `/sitemap.xml`, the canonical domain redirect and the Preview `noindex` header.
 
-Preparation and automated tests do not prove live delivery. That final check requires valid Resend/Turnstile credentials and the deployed domain.
+Preparation and automated tests do not prove live delivery. That final check requires valid Resend credentials and the deployed domain.
 
 ## References
 

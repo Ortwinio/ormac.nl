@@ -32,14 +32,12 @@ export const planFormCopy = {
     successTitle: "Je plan is verstuurd",
     successNote: "Je aanvraag en documenten zijn aangeboden aan onze e-maildienst voor verzending naar Ormac. Je hoort binnen twee weken van ons, bij spoed binnen vijf werkdagen.",
     reference: "Je referentie", sending: "Bezig met versturen…", checking: "Verzendservice controleren…",
-    humanTitle: "Bevestig dat je een mens bent", humanNote: "Cloudflare controleert dit om ongewenste inzendingen te voorkomen.", retryHuman: "Menscontrole opnieuw laden",
     errors: {
       unavailable: "Het formulier kan momenteel niet verzenden. Probeer het later opnieuw.",
-      human: "Rond de menscontrole af voordat je je plan verstuurt. Is de controle verlopen? Doe deze dan opnieuw.",
       invalid: "Controleer de verplichte velden en je e-mailadres in alle stappen.",
       files: "Controleer je documenten: PDF of Excel, maximaal 5 bestanden en 4 MB in totaal. Het pitchdeck moet een PDF zijn.",
       rate: "Er zijn te veel verzendpogingen gedaan. Wacht 15 minuten en probeer het opnieuw.",
-      delivery: "We konden de verzending niet bevestigen. Je invoer is bewaard. Rond de menscontrole opnieuw af en probeer nogmaals.",
+      delivery: "We konden de verzending niet bevestigen. Je invoer is bewaard. Probeer het opnieuw.",
     },
   },
   en: {
@@ -75,14 +73,12 @@ export const planFormCopy = {
     successTitle: "Your plan has been sent",
     successNote: "Your application and documents have been accepted by our email service for sending to Ormac. We will respond within two weeks, or five working days for urgent applications.",
     reference: "Your reference", sending: "Sending…", checking: "Checking sending service…",
-    humanTitle: "Confirm you are human", humanNote: "Cloudflare checks this to prevent unwanted submissions.", retryHuman: "Reload human check",
     errors: {
       unavailable: "The form is currently unable to send. Please try again later.",
-      human: "Complete the human check before sending your plan. If the check expired, complete it again.",
       invalid: "Check the required fields and your email address in every step.",
       files: "Check your documents: PDF or Excel, up to 5 files and 4 MB combined. The pitch deck must be a PDF.",
       rate: "Too many sending attempts. Wait 15 minutes and try again.",
-      delivery: "We could not confirm sending. Your entries are preserved. Complete the human check again and retry.",
+      delivery: "We could not confirm sending. Your entries are preserved. Please try again.",
     },
   },
 };

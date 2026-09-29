@@ -37,7 +37,7 @@ export function PrivacyPageContent({ locale }: { locale: Locale }) {
             <section aria-labelledby={`${section.id}-title`}>
               <h2 id={`${section.id}-title`}>{section.title}</h2>
               {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-              {(section.id === "menscontrole" || section.id === "human-check") && <p><a href="https://www.cloudflare.com/turnstile-privacy-policy/">Cloudflare Turnstile privacy</a> · <a href="https://resend.com/legal/privacy-policy">Resend privacy</a></p>}
+              {section.id === "email" && <p><a href="https://resend.com/legal/privacy-policy">Resend privacy</a></p>}
               {(section.id === "rights" || section.id === "rechten") && <p>{contactLink} · <a href="https://www.autoriteitpersoonsgegevens.nl/">{t.authority}</a></p>}
             </section>
           </ScrollBlock>

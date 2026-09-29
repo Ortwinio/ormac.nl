@@ -5,7 +5,6 @@ import Link from "next/link";
 import { copy } from "@/lib/copy";
 import { planFormCopy } from "@/lib/copy/plan-form";
 import type { Locale } from "@/lib/i18n";
-import { HumanCheck } from "./human-check";
 import { contactLimits, documentExtensions } from "@/lib/contact-settings";
 import s from "./ormac.module.css";
 
@@ -21,9 +20,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
   const [reference, setReference] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<keyof typeof t.errors | null>(null);
-  const [service, setService] = useState<{ ready: boolean; siteKey: string | null } | null>(null);
-  const [token, setToken] = useState("");
-  const [checkAttempt, setCheckAttempt] = useState(0);
+  const [service, setService] = useState<{ ready: boolean } | null>(null);
   const submissionId = useRef("");
   const inFlight = useRef(false);
   const invalidField = useRef<Validatable | null>(null);
@@ -34,8 +31,8 @@ export function ContactForm({ locale }: { locale: Locale }) {
     let active = true;
     fetch("/api/contact/", { cache: "no-store" })
       .then(async response => { if (!response.ok) throw new Error(); return response.json(); })
-      .then(data => { if (active) setService({ ready: data.ready === true, siteKey: typeof data.siteKey === "string" ? data.siteKey : null }); })
-      .catch(() => { if (active) setService({ ready: false, siteKey: null }); });
+      .then(data => { if (active) setService({ ready: data.ready === true }); })
+      .catch(() => { if (active) setService({ ready: false }); });
     return () => { active = false; };
   }, []);
 
@@ -49,7 +46,6 @@ export function ContactForm({ locale }: { locale: Locale }) {
 
   function go(next: number) {
     setError(null);
-    setToken("");
     focusAfterChange.current = true;
     setStep(next);
   }
@@ -73,12 +69,10 @@ export function ContactForm({ locale }: { locale: Locale }) {
     if (!validate(step === 3)) return;
     if (step < 3) { go(step + 1); return; }
     if (!service?.ready) { setError("unavailable"); return; }
-    if (!token) { setError("human"); return; }
     const form = formRef.current;
     if (!form || !validateFiles()) return;
     if (!submissionId.current) submissionId.current = crypto.randomUUID();
     const body = new FormData(form);
-    body.set("cf-turnstile-response", token);
     body.set("submissionId", submissionId.current);
     inFlight.current = true;
     setSending(true);
@@ -99,8 +93,6 @@ export function ContactForm({ locale }: { locale: Locale }) {
     finally {
       inFlight.current = false;
       setSending(false);
-      setToken("");
-      setCheckAttempt(attempt => attempt + 1);
     }
   }
 
@@ -186,13 +178,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         </div>
         <Field label={t.source}><select name="source" defaultValue=""><option value="">{t.choose}</option>{t.sources.map(option => <option key={option}>{option}</option>)}</select></Field>
         <label className={s.formCheck}><input name="privacy" type="checkbox" required /><span>{t.privacy} * <Link href={locale === 'nl' ? '/privacy/#privacy-top' : '/en/privacy/#privacy-top'}>{copy[locale].footer.privacy}</Link></span></label>
-        {step === 3 && !success && <div className={s.humanCheck}>
-          <h3>{t.humanTitle}</h3><p className={s.formNote}>{t.humanNote}</p>
-          {!service ? <p role="status">{t.checking}</p> : service.ready && service.siteKey ? <>
-            <HumanCheck resetKey={checkAttempt} locale={locale} siteKey={service.siteKey} onToken={setToken} />
-            <button type="button" className={s.checkRetry} disabled={sending} onClick={() => { setToken(""); setCheckAttempt(attempt => attempt + 1); }}>{t.retryHuman}</button>
-          </> : <p>{t.errors.unavailable}</p>}
-        </div>}
+        {step === 3 && !service && <p role="status">{t.checking}</p>}
       </fieldset>
 
       {error && <p role="alert" className={s.formError}>{t.errors[error]}</p>}
@@ -204,7 +190,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <span className={s.formNote}>{t.confidential}</span>
         <div>
           {step > 0 && <button type="button" disabled={sending} className={`${s.button} ${s.outline}`} onClick={() => go(step - 1)}>{t.previous}</button>}
-          <button type="submit" disabled={sending || (step === 3 && (!token || !service?.ready))} className={s.button}>{sending ? t.sending : step === 3 ? t.send : t.next}</button>
+          <button type="submit" disabled={sending || (step === 3 && !service?.ready)} className={s.button}>{sending ? t.sending : step === 3 ? t.send : t.next}</button>
         </div>
       </div>
     </form>

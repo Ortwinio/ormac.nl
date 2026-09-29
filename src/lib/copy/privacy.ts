@@ -5,10 +5,10 @@ export const privacyCopy = {
   nl: {
     title: "Privacyverklaring",
     lead: "We gaan zorgvuldig om met je persoonsgegevens. Hier lees je welke gegevens Ormac gebruikt, waarom dat gebeurt en welke keuzes en rechten je hebt.",
-    updated: "Laatst bijgewerkt: 22 september 2026",
+    updated: "Laatst bijgewerkt: 29 september 2026",
     controllerTitle: "Wie is verantwoordelijk?",
     controller: "Ormac B.V. is verantwoordelijk voor de verwerking van persoonsgegevens voor deze website en voor vragen en investeringsaanvragen die je aan ons richt.",
-    preview: "Als je het aanvraagformulier verstuurt, verwerkt onze server je ingevulde gegevens en documenten en biedt deze via Resend per e-mail aan Ormac aan. De website bewaart je aanvraag niet in een eigen database. Voor verzending moet de menscontrole slagen. Is verzenden niet beschikbaar? Dan toont het formulier dat en kun je het later opnieuw proberen.",
+    preview: "Als je het aanvraagformulier verstuurt, verwerkt onze server je ingevulde gegevens en documenten en biedt deze via Resend per e-mail aan Ormac aan. De website bewaart je aanvraag niet in een eigen database. Is verzenden niet beschikbaar? Dan toont het formulier dat en kun je het later opnieuw proberen.",
     sections: [
       { id: "gegevens", title: "Welke gegevens gebruiken we?", paragraphs: [
         "Als je het formulier verstuurt of ons mailt, ontvangen we je e-mailadres, je bericht en de gegevens en bijlagen die je zelf meestuurt. Bij een investeringsaanvraag kunnen dit je naam, functie, telefoonnummer, bedrijfsgegevens, financiële informatie, pitchdeck en informatie over je team of mede-investeerders zijn. Stuur alleen persoonsgegevens mee die nodig zijn voor je vraag of aanvraag.",
@@ -26,9 +26,8 @@ export const privacyCopy = {
         "We bewaren correspondentie en aanvraaggegevens zolang deze nodig zijn voor het beantwoorden van je vraag, het beoordelen van je voorstel en het afhandelen van de daaruit voortvloeiende contacten of afspraken. Daarna worden ze verwijderd, tenzij een wettelijke bewaarplicht of de afhandeling van een geschil verdere bewaring nodig maakt. De relevante factoren zijn dus de duur van de beoordeling, een eventuele samenwerking en toepasselijke wettelijke verplichtingen. Je kunt ons vragen welke bewaartermijn op jouw gegevens van toepassing is.",
         "De bewaartermijnen van de cookies staan hieronder. Aanvragen worden tijdens verzending tijdelijk op de server verwerkt en daarna via de e-maildienst en onze mailbox bewaard. Voor misbruikbeperking houdt de server maximaal 15 minuten een teller bij met een hash van het e-mailadres; deze teller bevat geen aanvraag of documenten."
       ] },
-      { id: "menscontrole", title: "E-mailverzending en menscontrole", paragraphs: [
-        "Resend verwerkt de inhoud en bijlagen van je aanvraag om de e-mail af te leveren. Cloudflare Turnstile controleert in de laatste formulierstap of de inzending van een mens komt. Daarbij verwerkt Cloudflare technische gegevens, zoals je IP-adres en browsersignalen, voor beveiliging en het voorkomen van misbruik, op basis van ons gerechtvaardigde belang bij een veilige website. We sturen je aanvraagvelden en documenten niet naar de verificatie-API van Cloudflare.",
-        "De menscontrole is geen toestemming voor advertenties. De website activeert geen Turnstile pre-clearance-cookie. Bij vragen over de menscontrole kun je contact opnemen via de contactmogelijkheden op deze website."
+      { id: "email", title: "E-mailverzending", paragraphs: [
+        "Resend verwerkt de inhoud en bijlagen van je aanvraag om de e-mail af te leveren."
       ] },
       { id: "buiten-eer", title: "Verwerking buiten de EER", paragraphs: [
         "Bij het gebruik van internationale dienstverleners kan verwerking buiten de Europese Economische Ruimte aan de orde zijn. Een dergelijke doorgifte mag alleen plaatsvinden met een geldige waarborg, bijvoorbeeld een adequaatheidsbesluit of goedgekeurde standaardcontractbepalingen en, waar nodig, aanvullende maatregelen. Je kunt via de contactmogelijkheden op deze website informatie vragen over de dienstverleners, locaties en waarborgen die op jouw gegevens van toepassing zijn."
@@ -53,10 +52,10 @@ export const privacyCopy = {
   en: {
     title: "Privacy statement",
     lead: "We handle your personal data with care. This statement explains which data Ormac uses, why we use it, and your choices and rights.",
-    updated: "Last updated: 22 September 2026",
+    updated: "Last updated: 29 September 2026",
     controllerTitle: "Who is responsible?",
     controller: "Ormac B.V. is responsible for processing personal data for this website and for enquiries and investment proposals you send to us.",
-    preview: "When you submit the application form, our server processes your entries and documents and passes them to Resend for email delivery to Ormac. The website does not keep applications in its own database. The human check must succeed before sending. If sending is unavailable, the form tells you and you can try again later.",
+    preview: "When you submit the application form, our server processes your entries and documents and passes them to Resend for email delivery to Ormac. The website does not keep applications in its own database. If sending is unavailable, the form tells you and you can try again later.",
     sections: [
       { id: "data", title: "Which data do we use?", paragraphs: [
         "When you submit the form or email us, we receive your email address, message and the information and attachments you choose to send. For an investment proposal, this may include your name, role, phone number, company details, financial information, pitch deck, and information about your team or co-investors. Only include personal data necessary for your enquiry or application.",
@@ -74,9 +73,8 @@ export const privacyCopy = {
         "We keep correspondence and application information for as long as needed to answer your enquiry, assess your proposal, and handle the resulting discussions or agreements. It is then deleted unless a legal retention requirement or a dispute requires further retention. The relevant criteria are the duration of the assessment, any resulting relationship and applicable legal obligations. You can ask us which retention period applies to your information.",
         "Cookie lifetimes are listed below. Applications are processed temporarily on the server during sending, then retained by the email service and in our mailbox. To limit abuse, the server keeps an attempt counter with a hash of the email address for up to 15 minutes; this counter contains no application or documents."
       ] },
-      { id: "human-check", title: "Email delivery and human verification", paragraphs: [
-        "Resend processes your application content and attachments to deliver the email. Cloudflare Turnstile checks in the final form step whether the submission comes from a human. Cloudflare processes technical information such as your IP address and browser signals for security and abuse prevention, based on our legitimate interest in a secure website. We do not send your application fields or documents to Cloudflare’s verification API.",
-        "The human check is not consent to advertising. The website does not enable a Turnstile pre-clearance cookie. For questions about the human check, use the contact options on this website."
+      { id: "email", title: "Email delivery", paragraphs: [
+        "Resend processes your application content and attachments to deliver the email."
       ] },
       { id: "outside-eea", title: "Processing outside the EEA", paragraphs: [
         "Using international service providers may involve processing outside the European Economic Area. Such transfers may take place only with a valid safeguard, such as an adequacy decision or approved standard contractual clauses and additional measures where needed. Use the contact options on this website for information about the providers, locations and safeguards applicable to your data."

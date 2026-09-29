@@ -200,9 +200,6 @@
 .formPreview strong { overflow-wrap: anywhere; }
 .formError { padding: 14px 18px; background: var(--gold-soft); border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0; font-size: 15px; }
 .formError a { text-decoration: underline; }
-.humanCheck { display: grid; gap: 12px; margin-top: 18px; min-width: 0; }
-.humanCheck h3 { font-size: 20px; }
-.checkRetry { padding: 0; border: 0; background: none; color: var(--heading); text-decoration: underline; cursor: pointer; justify-self: start; }
 .planForm button:disabled { opacity: .5; cursor: not-allowed; }
 .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .previewNote { font-size: 14px; background: var(--gold-soft); border-radius: 12px; padding: 12px 14px; }

@@ -4,18 +4,15 @@ import { contactLimits } from "./contact-settings.ts";
 export type ContactConfig = {
   apiKey: string;
   from: string;
-  siteKey: string;
-  secret: string;
   origins: string[];
 };
 
 export function contactConfig(env: Record<string, string | undefined> = process.env): ContactConfig | null {
-  const { RESEND_API_KEY: apiKey, CONTACT_FROM_EMAIL: from, TURNSTILE_SITE_KEY: siteKey, TURNSTILE_SECRET_KEY: secret } = env;
-  // Never permit the public, always-pass Turnstile test keys to send real emails.
-  if (!apiKey || !from || !siteKey || !secret || /[\r\n]/.test(from) || [siteKey, secret].some(key => /^[123]x0{10}/.test(key))) return null;
+  const { RESEND_API_KEY: apiKey, CONTACT_FROM_EMAIL: from } = env;
+  if (!apiKey || !from || /[\r\n]/.test(from)) return null;
   const origins = (env.CONTACT_ALLOWED_ORIGINS || "https://ormac.nl,https://www.ormac.nl").split(",").map(s => s.trim()).filter(Boolean);
   if (env.NODE_ENV !== "production") origins.push("http://localhost:43129", "http://127.0.0.1:43129", "http://localhost:43127", "http://127.0.0.1:43127");
-  return { apiKey, from, siteKey, secret, origins };
+  return { apiKey, from, origins };
 }
 
 class ContactError extends Error {
@@ -133,7 +130,7 @@ function emailText(fields: Record<string, string>, id: string) {
   }).join("\n\n");
 }
 
-// A supplementary, bounded per-process limit. Turnstile remains the primary abuse check.
+// Bounded per-process rate limit, alongside origin checks and the honeypot.
 const attempts = new Map<string, { count: number; until: number }>();
 function limited(email: string) {
   const now = Date.now();
@@ -152,22 +149,10 @@ export async function handleContact(request: Request, config: ContactConfig | nu
     if (!origin || !config.origins.includes(origin)) fail("invalid", 403);
     const form = await boundedFormData(request);
     if (form.get("companyFax")) fail("invalid");
-    const token = form.get("cf-turnstile-response");
-    if (typeof token !== "string" || !token || token.length > 2048) fail("human", 403);
     const id = form.get("submissionId");
     if (typeof id !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)) fail("invalid");
     const fields = readFields(form);
     const attachments = await readAttachments(form);
-    let result;
-    try {
-      const verification = await sendRequest("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret: config.secret, response: token }), signal: AbortSignal.timeout(10_000),
-      });
-      if (!verification.ok) fail("human", 403);
-      result = await verification.json();
-    } catch { fail("human", 403); }
-    if (result?.success !== true || result.action !== "contact" || result.hostname !== new URL(origin).hostname) fail("human", 403);
     if (limited(fields.email)) fail("rate", 429);
     const payload = {
       from: config.from, to: ["plan@ormac.nl"], reply_to: fields.email,
