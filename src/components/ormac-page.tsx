@@ -175,7 +175,8 @@ export function OrmacPage({ locale }: { locale: Locale }) {
         </section>
       </ScrollBlock>
 
-      <ScrollBlock id="contact">
+      {/* Keep the multi-step form in normal flow so later sections cannot cover its controls. */}
+      <ScrollBlock id="contact" animate={false}>
         <section className={`${s.wrap} ${s.block} ${s.plan}`}>
           <div className={`${s.textStack} ${s.planIntro}`}>
             <h2 className={s.sectionTitle}>{t.contact.title}</h2><p>{t.contact.intro}</p><h3>{t.contact.needTitle}</h3>

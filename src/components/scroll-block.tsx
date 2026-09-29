@@ -4,11 +4,12 @@ import { useEffect, useRef, type ReactNode } from "react";
 import styles from "./scroll-block.module.css";
 
 /** Native sticky positioning keeps wheel, touch, keyboard and anchor scrolling intact. */
-export function ScrollBlock({ children, id, className = "" }: { children: ReactNode; id?: string; className?: string }) {
+export function ScrollBlock({ children, id, className = "", animate = true }: { children: ReactNode; id?: string; className?: string; animate?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!animate) return;
     const root = rootRef.current;
     const pin = pinRef.current;
     if (!root || !pin) return;
@@ -78,7 +79,7 @@ export function ScrollBlock({ children, id, className = "" }: { children: ReactN
       window.removeEventListener("resize", measure);
       reducedMotion.removeEventListener("change", measure);
     };
-  }, []);
+  }, [animate]);
 
   return <div ref={rootRef} id={id} className={`${styles.scene} ${className}`} data-scroll-block>
     <div ref={pinRef} className={styles.pin}>
