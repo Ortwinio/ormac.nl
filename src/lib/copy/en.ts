@@ -264,12 +264,12 @@ export const en: Copy = {
       {
         "name": "ActARion (with partner DeepSight)",
         "body": "ActARion combines AI and augmented reality for industrial, logistics and energy companies. Critical know-how is captured and operators receive step-by-step guidance on the shop floor. Active in the Benelux, DACH and the Nordics.",
-        "url": "https://www.actarion.com"
+        "url": "https://actarion.com"
       },
       {
         "name": "Four Oaks Real Estate",
         "body": "Acquires, redevelops and operates commercial real estate in the five largest cities in the Netherlands, and handles leasing, management and brokerage, with a focus on sustainable long-term value.",
-        "url": "https://www.fouroaksrealestate.nl"
+        "url": "https://fouroaksrealestate.nl"
       },
       {
         "name": "BikeFitBoost",

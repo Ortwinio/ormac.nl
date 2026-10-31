@@ -20,6 +20,15 @@ const portfolioLogos = [
   { src: "/images/portfolio/bikefitboost.svg", width: 344, height: 60 },
   { src: "/images/portfolio/familiecadeau.svg", width: 220, height: 220 },
 ];
+/* Exit logos, in the order of portfolio.exits. Arvix has no surviving logo. */
+const exitLogos: ({ src: string; width: number; height: number } | null)[] = [
+  { src: "/images/portfolio/exits/orangevalley.svg", width: 312, height: 60 },
+  { src: "/images/portfolio/exits/sitespect.svg", width: 283, height: 58 },
+  null,
+  { src: "/images/portfolio/exits/blueelevation.svg", width: 770, height: 191 },
+  { src: "/images/portfolio/exits/aubergine-it.png", width: 324, height: 85 },
+  { src: "/images/portfolio/exits/copperim.png", width: 640, height: 200 },
+];
 
 type Props = { locale: Locale };
 
@@ -316,7 +325,13 @@ export function PortfolioPage({ locale }: Props) {
             </article>;
           })}</div>
           <div className={s.portfolioSubhead}><h2>{t.portfolio.exitsTitle}</h2><span>{nl ? "Bedrijven die we mee opbouwden en verkochten" : "Companies we helped build and sold"}</span></div>
-          <ul className={s.exits}>{t.portfolio.exits.map(item => <li key={item.name}><b>{item.name}</b><span className={s.pill}>Exit</span></li>)}</ul>
+          <ul className={s.exits}>{t.portfolio.exits.map((item, index) => {
+            const logo = exitLogos[index];
+            return <li key={item.name}>
+              {logo ? <Image src={logo.src} alt={item.name} width={logo.width} height={logo.height} unoptimized={logo.src.endsWith(".svg")} className={s.exitLogo} /> : <b>{item.name}</b>}
+              <span className={s.pill}>Exit</span>
+            </li>;
+          })}</ul>
           <div className={s.exitDescriptions}>{t.portfolio.exits.map(item => <p key={item.name}><b>{item.name}</b> – {item.body}</p>)}</div>
           <h2 className={s.subhead}>{t.portfolio.failedTitle}</h2>
           <div className={s.failed}>
