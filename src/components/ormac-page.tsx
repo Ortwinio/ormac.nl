@@ -20,14 +20,19 @@ const portfolioLogos = [
   { src: "/images/portfolio/bikefitboost.svg", width: 344, height: 60 },
   { src: "/images/portfolio/familiecadeau.svg", width: 220, height: 220 },
 ];
-/* Exit logos, in the order of portfolio.exits. Arvix has no surviving logo. */
-const exitLogos: ({ src: string; width: number; height: number } | null)[] = [
+/* Exit logos, in the order of portfolio.exits. */
+const exitLogos: ({ src: string; width: number; height: number; showName?: boolean } | null)[] = [
   { src: "/images/portfolio/exits/orangevalley.svg", width: 312, height: 60 },
   { src: "/images/portfolio/exits/sitespect.svg", width: 283, height: 58 },
-  null,
+  { src: "/images/portfolio/exits/arvix.png", width: 170, height: 185, showName: true },
   { src: "/images/portfolio/exits/blueelevation.svg", width: 770, height: 191 },
   { src: "/images/portfolio/exits/aubergine-it.png", width: 324, height: 85 },
   { src: "/images/portfolio/exits/copperim.png", width: 640, height: 200 },
+];
+/* Logos of investments that did not work out, in the order of portfolio.failed. */
+const failedLogos: ({ src: string; width: number; height: number } | null)[] = [
+  null,
+  { src: "/images/portfolio/easyways.png", width: 414, height: 84 },
 ];
 
 type Props = { locale: Locale };
@@ -328,14 +333,20 @@ export function PortfolioPage({ locale }: Props) {
           <ul className={s.exits}>{t.portfolio.exits.map((item, index) => {
             const logo = exitLogos[index];
             return <li key={item.name}>
-              {logo ? <Image src={logo.src} alt={item.name} width={logo.width} height={logo.height} unoptimized={logo.src.endsWith(".svg")} className={s.exitLogo} /> : <b>{item.name}</b>}
+              {logo ? <span className={s.exitMark}><Image src={logo.src} alt={logo.showName ? "" : item.name} width={logo.width} height={logo.height} unoptimized={logo.src.endsWith(".svg")} className={s.exitLogo} />{logo.showName && <b>{item.name}</b>}</span> : <b>{item.name}</b>}
               <span className={s.pill}>Exit</span>
             </li>;
           })}</ul>
           <div className={s.exitDescriptions}>{t.portfolio.exits.map(item => <p key={item.name}><b>{item.name}</b> – {item.body}</p>)}</div>
           <h2 className={s.subhead}>{t.portfolio.failedTitle}</h2>
           <div className={s.failed}>
-            {t.portfolio.failed.map(item => <article key={item.name}><h3>{item.name}</h3><p>{item.body}</p></article>)}
+            {t.portfolio.failed.map((item, index) => {
+              const logo = failedLogos[index];
+              return <article key={item.name}>
+                {logo ? <Image src={logo.src} alt="" width={logo.width} height={logo.height} className={s.failedLogo} /> : <span className={`${s.failedLogo} ${s.failedSpacer}`} aria-hidden="true" />}
+                <h3>{item.name}</h3><p>{item.body}</p>
+              </article>;
+            })}
             <blockquote className={s.lesson}>{t.portfolio.learned}</blockquote>
           </div>
         </section>

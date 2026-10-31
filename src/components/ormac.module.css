@@ -266,3 +266,7 @@
 @media (prefers-reduced-motion: reduce) { .exploreCard { transition: none; } .exploreCard:hover { transform: none; } }
 
 .exitLogo { max-height: 44px; max-width: 88%; width: auto; height: auto; object-fit: contain; }
+.failedLogo { display: block; height: 32px; max-width: 70%; object-fit: contain; object-position: left; width: auto; margin-bottom: 12px; opacity: .85; }
+.exitMark { display: inline-flex; align-items: center; gap: 8px; }
+.exitMark b { font-family: var(--font-heading); font-size: 22px; color: #123c39; }
+@media (max-width: 820px) { .failedSpacer { display: none; } }
