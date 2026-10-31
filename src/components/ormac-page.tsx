@@ -13,7 +13,13 @@ import s from "./ormac.module.css";
 const domainImages = ["health", "learning", "marketing", "business"];
 const roundNames = ["Seed", "Early growth", "Scale-up"];
 const roundAmounts = ["€25k – €50k", "€50k – €100k", "€50k – €100k"];
-const portfolioMarks = ["WisePIM", "ActARion", "Four Oaks"];
+const portfolioLogos = [
+  { src: "/images/portfolio/wisepim.webp", width: 80, height: 80 },
+  { src: "/images/portfolio/actarion.png", width: 408, height: 118 },
+  { src: "/images/portfolio/four-oaks.webp", width: 480, height: 419 },
+  { src: "/images/portfolio/bikefitboost.svg", width: 344, height: 60 },
+  { src: "/images/portfolio/familiecadeau.svg", width: 220, height: 220 },
+];
 
 type Props = { locale: Locale };
 
@@ -300,7 +306,15 @@ export function PortfolioPage({ locale }: Props) {
         <section className={`${s.wrap} ${s.block}`}>
           <p className={s.lead}>{t.portfolio.intro}</p>
           <h2 className={s.subhead}>{t.portfolio.activeTitle}</h2>
-          <div className={s.active}>{t.portfolio.active.map((item, index) => <article key={item.name}><div className={s.logoTile} aria-hidden="true">{portfolioMarks[index]}</div><h3>{item.name}</h3><p>{item.body}</p></article>)}</div>
+          <div className={s.active}>{t.portfolio.active.map((item, index) => {
+            const logo = portfolioLogos[index];
+            return <article key={item.name}>
+              <a href={item.url} target="_blank" rel="noreferrer" className={s.logoTile} aria-label={`${item.name} (${nl ? "opent in een nieuw venster" : "opens in a new window"})`}>
+                {logo && <Image src={logo.src} alt="" width={logo.width} height={logo.height} unoptimized={logo.src.endsWith(".svg")} />}
+              </a>
+              <h3><a href={item.url} target="_blank" rel="noreferrer">{item.name}</a></h3><p>{item.body}</p>
+            </article>;
+          })}</div>
           <div className={s.portfolioSubhead}><h2>{t.portfolio.exitsTitle}</h2><span>{nl ? "Bedrijven die we mee opbouwden en verkochten" : "Companies we helped build and sold"}</span></div>
           <ul className={s.exits}>{t.portfolio.exits.map(item => <li key={item.name}><b>{item.name}</b><span className={s.pill}>Exit</span></li>)}</ul>
           <div className={s.exitDescriptions}>{t.portfolio.exits.map(item => <p key={item.name}><b>{item.name}</b> – {item.body}</p>)}</div>

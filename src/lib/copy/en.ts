@@ -258,15 +258,28 @@ export const en: Copy = {
     "active": [
       {
         "name": "WisePIM",
-        "body": "AI-driven SaaS platform for product information management (PIM). It helps brands and retailers get their product data in order faster and better."
+        "body": "AI-driven SaaS platform for product information management (PIM). It helps brands and retailers get their product data in order faster and better.",
+        "url": "https://wisepim.com"
       },
       {
         "name": "ActARion (with partner DeepSight)",
-        "body": "ActARion combines AI and augmented reality for industrial, logistics and energy companies. Critical know-how is captured and operators receive step-by-step guidance on the shop floor. Active in the Benelux, DACH and the Nordics."
+        "body": "ActARion combines AI and augmented reality for industrial, logistics and energy companies. Critical know-how is captured and operators receive step-by-step guidance on the shop floor. Active in the Benelux, DACH and the Nordics.",
+        "url": "https://www.actarion.com"
       },
       {
         "name": "Four Oaks Real Estate",
-        "body": "Acquires, redevelops and operates commercial real estate in the five largest cities in the Netherlands, and handles leasing, management and brokerage, with a focus on sustainable long-term value."
+        "body": "Acquires, redevelops and operates commercial real estate in the five largest cities in the Netherlands, and handles leasing, management and brokerage, with a focus on sustainable long-term value.",
+        "url": "https://www.fouroaksrealestate.nl"
+      },
+      {
+        "name": "BikeFitBoost",
+        "body": "Online bike fitting for road and leisure cyclists: free calculators for saddle height, frame size and crank length, plus a full bike fit based on your body measurements. Formerly BestBikeFit4U.",
+        "url": "https://bikefitboost.com"
+      },
+      {
+        "name": "familiecadeau.nl",
+        "body": "A printed family history book as a gift. With just a few names, familiecadeau.nl searches the archives for your ancestors, five to ten generations back. Opens on 11 November 2026.",
+        "url": "https://familiecadeau.nl"
       }
     ],
     "exitsTitle": "Successful exits",

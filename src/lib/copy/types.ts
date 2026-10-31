@@ -108,7 +108,7 @@ export type Copy = {
     title: string;
     intro: string;
     activeTitle: string;
-    active: { name: string; body: string }[];
+    active: { name: string; body: string; url: string }[];
     exitsTitle: string;
     exits: { name: string; body: string }[];
     failedTitle: string;
