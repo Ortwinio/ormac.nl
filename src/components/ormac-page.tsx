@@ -24,14 +24,14 @@ const portfolioLogos = [
 const exitLogos: ({ src: string; width: number; height: number; showName?: boolean } | null)[] = [
   { src: "/images/portfolio/exits/orangevalley.svg", width: 312, height: 60 },
   { src: "/images/portfolio/exits/sitespect.svg", width: 283, height: 58 },
-  { src: "/images/portfolio/exits/arvix.png", width: 170, height: 185, showName: true },
+  { src: "/images/portfolio/exits/arvix.png", width: 300, height: 100 },
   { src: "/images/portfolio/exits/blueelevation.svg", width: 770, height: 191 },
   { src: "/images/portfolio/exits/aubergine-it.png", width: 324, height: 85 },
   { src: "/images/portfolio/exits/copperim.png", width: 640, height: 200 },
 ];
 /* Logos of investments that did not work out, in the order of portfolio.failed. */
 const failedLogos: ({ src: string; width: number; height: number } | null)[] = [
-  null,
+  { src: "/images/portfolio/metadimensions.png", width: 170, height: 185 },
   { src: "/images/portfolio/easyways.png", width: 414, height: 84 },
 ];
 
