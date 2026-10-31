@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { OrganizationJsonLd } from "@/components/structured-data";
 import type { Locale } from "@/lib/i18n";
 import styles from "./ormac.module.css";
 
@@ -17,6 +18,7 @@ export function SiteShell({
       <SiteHeader locale={locale} />
       <main id="main" className="relative isolate z-0 flex-1">{children}</main>
       <SiteFooter locale={locale} />
+      <OrganizationJsonLd locale={locale} />
     </>
   );
 }

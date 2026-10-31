@@ -2,16 +2,16 @@ import type { Copy } from "@/lib/copy/types";
 import { privacyCopy } from "./privacy";
 
 export const en: Copy = {
+  "privacy": privacyCopy.en,
   "meta": {
-    "title": "Ormac — From working product to winning proposition",
-    "description": "Ormac invests in digital and AI-driven startups and scale-ups. We are entrepreneurs with proven go-to-market experience and six successful exits. We provide smart capital: funding, a seat on your advisory board and a network of 80+ experts."
+    "title": "Ormac — Investor in digital and AI startups | Smart capital",
+    "description": "Ormac invests in Dutch digital and AI startups with a working product and paying customers. With an advisory board seat, go-to-market help and 80+ experts."
   },
   "notFound": {
     "title": "This page is not on the map.",
     "body": "The address does not match a page on ormac.nl. Head home, or write to us if you were looking for something specific.",
     "back": "Back to home"
   },
-  "privacy": privacyCopy.en,
   "nav": [
     {
       "id": "home",
@@ -75,7 +75,6 @@ export const en: Copy = {
     }
   ],
   "difference": {
-    "eyebrow": "What sets us apart",
     "title": "Two things set us apart",
     "items": [
       {
@@ -89,7 +88,6 @@ export const en: Copy = {
     ]
   },
   "offer": {
-    "eyebrow": "What you get",
     "title": "What you get from us",
     "items": [
       {
@@ -111,7 +109,6 @@ export const en: Copy = {
     ]
   },
   "focus": {
-    "eyebrow": "Thesis",
     "title": "What we invest in",
     "body": "We invest in digital and AI-driven companies with a working product and their first paying customers. Preferably in applications that deliver value quickly, for consumers or SMEs, without years of R&D or complex regulation up front.",
     "areas": [
@@ -121,36 +118,10 @@ export const en: Copy = {
       "Business services"
     ]
   },
-  "stages": {
-    "eyebrow": "From seed to scale-up",
-    "title": "We come in where capital and support together make the biggest difference",
-    "body": "That is often just after the first validation, but also later, when you are ready to scale. We invest in stages and always alongside other investors. Our involvement grows with your company."
-  },
-  "track": {
-    "eyebrow": "Track record",
-    "title": "Building and investing in digital companies since 2002",
-    "body": "Ormac has been building and investing in digital companies since 2002.",
-    "logos": [
-      "OrangeValley",
-      "SiteSpect",
-      "Arvix",
-      "BlueElevation",
-      "Aubergine IT",
-      "CopperIM",
-      "WisePIM",
-      "ActARion",
-      "Four Oaks Real Estate"
-    ]
-  },
-  "closing": {
-    "title": "Do you have a working product and your first paying customers? Then we would like to meet you.",
-    "body": "Submit your plan and you will hear from us within two weeks. In a hurry? Let us know and we will respond within five working days."
-  },
   "founders": {
     "eyebrow": "For founders",
     "title": "What we look for",
     "intro": "We do not look for the perfect plan. We look for proof that customers are willing to pay, and for a team that can turn that into growth. We assess six criteria.",
-    "criteriaTitle": "Our six criteria",
     "criteria": [
       {
         "title": "A working product",
@@ -197,7 +168,7 @@ export const en: Copy = {
     "rounds": [
       {
         "title": "Seed",
-        "stage": "Working product, first pilots or paying customers",
+        "stage": "Working product and first paying customers",
         "body": "Usually through a convertible loan. The condition is that at least three other investors take part with a comparable amount. You do not need to set a valuation yet."
       },
       {
@@ -211,26 +182,14 @@ export const en: Copy = {
         "body": "Per round, in equity, alongside co-investors."
       }
     ],
-    "max": "Maximum per company: €250,000 in total, spread across all rounds.",
     "togetherTitle": "Why we invest together",
     "together": "We deliberately do not invest alone. With three to five investors at the table you get more capital, more knowledge and a broader network. The risk is better spread and your next round stands on firmer ground. Not found co-investors yet? We will help you through our network of angel investors, investor clubs and funds.",
-    "getTitle": "What you get from us",
-    "get": [
-      "A seat on your advisory board. An experienced entrepreneur and supervisor who thinks along critically and helps you stay focused.",
-      "Go-to-market experience from practice. Help with target audience, proposition, pricing, marketing and sales, from people who have done it successfully themselves.",
-      "A 100-day plan with clear goals for your target audience, pricing, messaging, sales pipeline and implementation.",
-      "Regular support through monthly check-ins and a quarterly review of your key KPIs.",
-      "Introductions to potential customers, partners, talent and co-investors.",
-      "Experts on call from our network, deployed specifically on your biggest growth blockers.",
-      "Preparation for your next round, with data room, KPIs, pitch and term sheet."
-    ],
     "free": "Support during the first 100 days is free of charge."
   },
   "approach": {
     "eyebrow": "Our approach",
     "title": "Fast where possible, thorough where it matters",
     "intro": "You want to know where you stand. That is why we work with a clear process, with fixed steps and realistic lead times.",
-    "stepsTitle": "From first contact to investment",
     "steps": [
       {
         "title": "Intake",
@@ -260,12 +219,9 @@ export const en: Copy = {
     ],
     "gtmTitle": "Go-to-market: where we make the difference",
     "gtm": "Most startups do not get stuck on their technology but on the road to market. Who is your ideal customer, what should it cost, which channel do you sell through, and how do you turn individual deals into a repeatable sales process? We have answered those questions ourselves at companies we successfully built and sold.",
-    "afterTitle": "After the investment",
     "after": [
-      "We are hands-on where it helps, without taking over the helm. You run your company. We help you make the right decisions faster. The first hundred days are intensive and free of charge; after that comes a fixed rhythm of monthly check-ins and quarterly reviews. We work towards an exit with a horizon of around five years, and we know how that works: we have done it six times ourselves."
+      "We are hands-on where it helps, without taking over the helm. You run your company. We help you make the right decisions faster. The first hundred days are intensive and free of charge; after that comes a fixed rhythm of monthly check-ins and quarterly reviews. We work towards an exit with a horizon of around five years."
     ],
-    "exitTitle": "Towards the exit",
-    "exit": "We invest for the long term, usually with a horizon of around five years. Together with you and the co-investors, we work towards a moment when everyone can realise the value that has been built. That could be a strategic acquisition, a larger investor coming in or a management buy-out. We know from experience how that works: we have done it successfully six times ourselves.",
     "boardQuote": "What are the three things that really need to happen this quarter?"
   },
   "network": {
@@ -274,77 +230,25 @@ export const en: Copy = {
     "intro": "Behind Ormac is a network of more than 80 entrepreneurs, investors and specialists we work with on a structural basis. People who have built, scaled and sold companies themselves.",
     "areasTitle": "Areas of expertise in our network",
     "areas": [
-      {
-        "title": "Market and product-market fit",
-        "body": ""
-      },
-      {
-        "title": "Go-to-market and sales",
-        "body": ""
-      },
-      {
-        "title": "Marketing and brand",
-        "body": ""
-      },
-      {
-        "title": "Pricing and unit economics",
-        "body": ""
-      },
-      {
-        "title": "Product and roadmap",
-        "body": ""
-      },
-      {
-        "title": "Technology and scalability",
-        "body": ""
-      },
-      {
-        "title": "Data and AI",
-        "body": ""
-      },
-      {
-        "title": "Security",
-        "body": ""
-      },
-      {
-        "title": "Privacy and GDPR",
-        "body": ""
-      },
-      {
-        "title": "AI governance and EU AI Act",
-        "body": ""
-      },
-      {
-        "title": "Legal and IP",
-        "body": ""
-      },
-      {
-        "title": "Finance and reporting",
-        "body": ""
-      },
-      {
-        "title": "Governance",
-        "body": ""
-      },
-      {
-        "title": "Team and leadership",
-        "body": ""
-      },
-      {
-        "title": "Internationalisation",
-        "body": ""
-      },
-      {
-        "title": "Follow-on funding",
-        "body": ""
-      }
+      "Market and product-market fit",
+      "Go-to-market and sales",
+      "Marketing and brand",
+      "Pricing and unit economics",
+      "Product and roadmap",
+      "Technology and scalability",
+      "Data and AI",
+      "Security",
+      "Privacy and GDPR",
+      "AI governance and EU AI Act",
+      "Legal and IP",
+      "Finance and reporting",
+      "Governance",
+      "Team and leadership",
+      "Internationalisation",
+      "Follow-on funding"
     ],
     "howTitle": "How we use the network",
-    "how": "For each investment we match three to five experts to your biggest growth blockers, with a clear brief and a concrete outcome. We are mentors at Startupbootcamp and help you find the right co-investors, now and in your next rounds.",
-    "coTitle": "Co-investors",
-    "co": "Our network also includes angel investors, investor clubs, and seed and venture funds. Because we always invest alongside other investors, we actively help you get the right co-investors to the table, now and in your next rounds.",
-    "ecoTitle": "Part of the ecosystem",
-    "eco": "We are active in the Dutch startup ecosystem, including as mentors at Startupbootcamp. That is how we find strong propositions, and how we can bring in the right partners for your next step."
+    "how": "For each investment we match three to five experts to your biggest growth blockers, with a clear brief and a concrete outcome. We are mentors at Startupbootcamp and help you find the right co-investors, now and in your next rounds."
   },
   "portfolio": {
     "eyebrow": "Portfolio",
@@ -409,8 +313,6 @@ export const en: Copy = {
     "eyebrow": "About Ormac",
     "title": "Entrepreneurs investing in entrepreneurs",
     "intro": "Ormac was founded in 2002 as a holding and investment company, on the initiative of Ortwin Verreck. Since then Ormac has founded, acquired, built and sold companies, mainly in data, digital marketing and SaaS. We want to be the bridge between a working product and a scalable company.",
-    "missionTitle": "Our mission",
-    "mission": "We want to be the bridge between a working product and a scalable company. Many startups have their technology in place but get stuck on the road to market. That is exactly where we make the difference: with capital, with proven go-to-market experience and with an advisory board that keeps you sharp and focused.",
     "standTitle": "What we stand for",
     "stand": [
       {
@@ -438,9 +340,7 @@ export const en: Copy = {
     ],
     "linkedin": "LinkedIn",
     "togetherTitle": "Together with our network",
-    "together": "Ormac does not stand alone: with every investment we work together with our network of 80+ experts and with the co-investors who come in alongside us. We work from a flexible office network with locations throughout the Netherlands.",
-    "whereTitle": "Where to find us",
-    "where": "We work from a flexible office network with locations throughout the Netherlands. That keeps us close to the entrepreneurs we invest in, wherever they are based."
+    "together": "Ormac does not stand alone: with every investment we work together with our network of 80+ experts and with the co-investors who come in alongside us. We work from a flexible office network with locations throughout the Netherlands."
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -484,41 +384,9 @@ export const en: Copy = {
     ]
   },
   "contact": {
-    "eyebrow": "Submit a plan",
     "title": "Submit your plan",
     "intro": "Ready for the next step? We read every plan carefully and you will hear from us within two weeks. Is your application urgent, for example because a funding round is closing soon? Let us know and we will respond within five working days.",
-    "need": "What do you need? A short explanation of the company, the round, and how you meet our criteria. Filling in the form takes about ten minutes.",
-    "emailHint": "Submit your pitch deck and financial plan using the form.",
-    "general": "General enquiries via LinkedIn",
-    "plans": "Submit plans using the form",
-    "confidentialTitle": "Confidentiality",
     "confidential": "We treat your plan and documents confidentially. We only share them with experts from our network when that is needed for the assessment, and always after consulting you.",
-    "successTitle": "Thank you, we have received your plan!",
-    "success": "You will receive a confirmation by email in production. We will contact you within two weeks. Did you mark your application as urgent? Then you will hear from us within five working days.",
-    "successLang": "This submission is marked as English. We will reply in English.",
-    "another": "Submit another plan",
-    "submitting": "Sending…",
-    "submit": "Send my plan",
-    "required": "Required",
-    "optional": "Optional",
-    "fields": {
-      "name": "Name",
-      "role": "Job title",
-      "email": "Email address",
-      "phone": "Phone number",
-      "company": "Company name",
-      "website": "Website",
-      "description": "Describe your company in no more than 500 characters",
-      "focus": "Focus area",
-      "stage": "Stage",
-      "round": "Total size of the round (€)",
-      "amount": "Amount requested from Ormac (€)",
-      "use": "What will you use the money for, and which milestones do you want to reach with it?",
-      "investors": "Which other investors are participating or in talks?",
-      "urgency": "My application is urgent",
-      "urgencyWhy": "Why, and by which date?",
-      "privacy": "I agree to the processing of my data in accordance with the privacy statement"
-    },
     "focusOptions": [
       {
         "value": "health",
@@ -555,17 +423,6 @@ export const en: Copy = {
         "label": "Scale-up"
       }
     ],
-    "errors": {
-      "name": "Please add your name.",
-      "email": "An email address is required.",
-      "emailInvalid": "That email does not look valid.",
-      "company": "Please add the company name.",
-      "description": "Tell us a little more about the company.",
-      "focus": "Choose a focus area.",
-      "stage": "Choose the stage that fits best.",
-      "privacy": "Please agree to the privacy statement.",
-      "urgency": "Please tell us why it is urgent, and by which date."
-    },
     "needTitle": "What do you need?",
     "needs": [
       "Your pitch deck",
@@ -575,9 +432,67 @@ export const en: Copy = {
     ]
   },
   "footer": {
-    "tagline": "From working product to winning proposition. Smart capital from entrepreneurs with proven go-to-market experience. Since 2002.",
     "legal": "Ormac B.V.",
-    "privacy": "Privacy statement",
-    "rights": "All rights reserved."
+    "privacy": "Privacy statement"
+  },
+  "pages": {
+    "founders": {
+      "title": "Looking for an investor? What Ormac looks for — Ormac",
+      "description": "Looking for an investor for your startup? Our six criteria, the amounts per stage (seed €25k–€50k, up to €250k) and how we invest alongside other investors.",
+      "eyebrow": "For founders",
+      "heading": "An investor who helps build your go-to-market",
+      "lead": "Ormac invests in Dutch digital and AI startups with a working product and first paying customers. Here you can read what we look for, how much we invest and how it works."
+    },
+    "approach": {
+      "title": "Our approach: from intake to advisory board — Ormac",
+      "description": "How Ormac works: intake within two weeks, due diligence with experts, a seat on your advisory board, go-to-market help and a network of 80+ specialists.",
+      "eyebrow": "Our approach",
+      "heading": "How we work together",
+      "lead": "From first contact to investment and beyond: what you can expect, how the advisory board works and how we put our network to work."
+    },
+    "portfolio": {
+      "title": "Portfolio and track record — Ormac",
+      "description": "Active investments, six successful exits and two investments that did not work out. What Ormac has built, invested and learned since 2002.",
+      "eyebrow": "Portfolio",
+      "heading": "Built, invested, learned",
+      "lead": "Active investments, six exits and what we learned from what did not work."
+    },
+    "about": {
+      "title": "About Ormac and Ortwin Verreck — Ormac",
+      "description": "Since 2002, Ormac has been the investment company of Ortwin Verreck: entrepreneur, certified supervisory board member and founder of Arvix, among others.",
+      "eyebrow": "About Ormac",
+      "heading": "Entrepreneurs investing in entrepreneurs",
+      "lead": "Since 2002 we have been building, investing in and selling digital companies."
+    }
+  },
+  "explore": {
+    "title": "More about Ormac",
+    "items": [
+      {
+        "page": "founders",
+        "title": "For founders",
+        "body": "Our six criteria, the amounts per stage and what we do not (yet) expect."
+      },
+      {
+        "page": "approach",
+        "title": "Our approach",
+        "body": "From intake to closing in six to ten weeks, the advisory board and our network."
+      },
+      {
+        "page": "portfolio",
+        "title": "Portfolio",
+        "body": "Active investments, six exits and what we learned from what did not work."
+      },
+      {
+        "page": "about",
+        "title": "About Ormac",
+        "body": "Who we are, what we stand for and what Ortwin Verreck brings."
+      }
+    ],
+    "more": "Read more"
+  },
+  "cta": {
+    "title": "Do you have a working product and your first paying customers?",
+    "body": "Submit your plan. You will hear from us within two weeks, or within five working days if it is urgent."
   }
 };

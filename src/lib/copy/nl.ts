@@ -2,16 +2,16 @@ import type { Copy } from "@/lib/copy/types";
 import { privacyCopy } from "./privacy";
 
 export const nl: Copy = {
+  "privacy": privacyCopy.nl,
   "meta": {
-    "title": "Ormac — Van werkend product naar winnende propositie",
-    "description": "Ormac investeert in digitale en AI-gedreven startups en scale-ups. Wij zijn ondernemers met bewezen go-to-market-ervaring en zes succesvolle exits. Wij bieden slim kapitaal: financiering, een zetel in je advisory board en een netwerk van 80+ experts."
+    "title": "Ormac — Investeerder in digitale en AI-startups | Smart capital",
+    "description": "Ormac investeert in Nederlandse digitale en AI-startups met een werkend product en betalende klanten. Met advisory board, go-to-markethulp en 80+ experts."
   },
   "notFound": {
     "title": "Deze pagina staat niet op de kaart.",
     "body": "Dit adres hoort niet bij een pagina op ormac.nl. Ga terug naar home, of schrijf ons als je iets specifieks zocht.",
     "back": "Terug naar home"
   },
-  "privacy": privacyCopy.nl,
   "nav": [
     {
       "id": "home",
@@ -75,7 +75,6 @@ export const nl: Copy = {
     }
   ],
   "difference": {
-    "eyebrow": "Wat ons onderscheidt",
     "title": "Twee dingen maken ons anders",
     "items": [
       {
@@ -89,7 +88,6 @@ export const nl: Copy = {
     ]
   },
   "offer": {
-    "eyebrow": "Wat je van ons krijgt",
     "title": "Wat je van ons krijgt",
     "items": [
       {
@@ -111,46 +109,19 @@ export const nl: Copy = {
     ]
   },
   "focus": {
-    "eyebrow": "These",
     "title": "Waar we in investeren",
     "body": "We investeren in digitale en AI-gedreven bedrijven met een werkend product en eerste betalende klanten. Het liefst in toepassingen die snel waarde leveren, voor consumenten of voor het MKB, zonder jarenlange R&D of complexe regelgeving vooraf.",
     "areas": [
-      "Personal health & sports",
-      "Learning & development",
+      "Gezondheid & sport",
+      "Leren & ontwikkeling",
       "Marketing & media",
       "Zakelijke dienstverlening"
     ]
-  },
-  "stages": {
-    "eyebrow": "Van seed tot scale-up",
-    "title": "Wij stappen in waar kapitaal en steun samen het meeste verschil maken",
-    "body": "Dat is vaak vlak na de eerste validatie, maar ook later, wanneer je klaar bent om te schalen. Wij investeren in stappen en altijd samen met andere investeerders. Onze betrokkenheid groeit mee met je bedrijf."
-  },
-  "track": {
-    "eyebrow": "Trackrecord",
-    "title": "Sinds 2002 bouwen en investeren in digitale bedrijven",
-    "body": "Ormac bouwt en investeert sinds 2002 in digitale bedrijven.",
-    "logos": [
-      "OrangeValley",
-      "SiteSpect",
-      "Arvix",
-      "BlueElevation",
-      "Aubergine IT",
-      "CopperIM",
-      "WisePIM",
-      "ActARion",
-      "Four Oaks Real Estate"
-    ]
-  },
-  "closing": {
-    "title": "Heb je een werkend product en je eerste betalende klanten? Dan maken wij graag kennis.",
-    "body": "Dien je plan in en je hoort binnen twee weken van ons. Heeft het spoed? Laat het weten, dan reageren wij binnen vijf werkdagen."
   },
   "founders": {
     "eyebrow": "Voor ondernemers",
     "title": "Wat we zoeken",
     "intro": "We kijken niet naar het perfecte plan. We kijken naar bewijs dat klanten willen betalen, en naar een team dat dat kan omzetten in groei. Daarbij toetsen we op zes criteria.",
-    "criteriaTitle": "Onze zes criteria",
     "criteria": [
       {
         "title": "Een werkend product",
@@ -197,7 +168,7 @@ export const nl: Copy = {
     "rounds": [
       {
         "title": "Seed",
-        "stage": "Werkend product, eerste pilots of betalende klanten",
+        "stage": "Werkend product en eerste betalende klanten",
         "body": "Meestal via een converteerbare lening. Voorwaarde is dat ten minste drie andere investeerders deelnemen voor een vergelijkbaar bedrag. Je hoeft nog geen waardering vast te leggen."
       },
       {
@@ -211,26 +182,14 @@ export const nl: Copy = {
         "body": "Per ronde, in aandelen, samen met co-investeerders."
       }
     ],
-    "max": "Maximum per bedrijf: €250.000 in totaal, verdeeld over alle rondes.",
     "togetherTitle": "Waarom we samen investeren",
     "together": "Met drie tot vijf investeerders aan tafel krijg je meer kapitaal, meer kennis en een breder netwerk. Het risico is beter verdeeld en je volgende ronde staat steviger. Heb je nog geen mede-investeerders gevonden? Vanuit ons netwerk van angel-investeerders, investeerdersclubs en fondsen helpen we je daarbij.",
-    "getTitle": "Wat je van ons krijgt",
-    "get": [
-      "Een zetel in je advisory board. Een ervaren ondernemer en toezichthouder die kritisch meedenkt en helpt scherp te blijven.",
-      "Go-to-market-ervaring uit de praktijk. Hulp bij doelgroep, propositie, pricing, marketing en sales, van mensen die het zelf succesvol hebben gedaan.",
-      "Een 100-dagenplan met heldere doelen voor je doelgroep, pricing, boodschap, salespijplijn en implementatie.",
-      "Regelmatige steun via maandelijkse check-ins en een kwartaalreview van je belangrijkste KPI’s.",
-      "Introducties bij potentiële klanten, partners, talent en co-investeerders.",
-      "Experts on call uit ons netwerk, gericht ingezet op je grootste groeiblokkades.",
-      "Voorbereiding op je volgende ronde, met dataroom, KPI’s, pitch en term sheet."
-    ],
     "free": "Begeleiding in de eerste 100 dagen is kosteloos."
   },
   "approach": {
     "eyebrow": "Onze aanpak",
     "title": "Snel waar het kan, zorgvuldig waar het moet",
     "intro": "Je wilt weten waar je aan toe bent. Daarom werken wij met een helder proces, met vaste stappen en realistische doorlooptijden.",
-    "stepsTitle": "Van eerste contact tot investering",
     "steps": [
       {
         "title": "Intake",
@@ -260,12 +219,9 @@ export const nl: Copy = {
     ],
     "gtmTitle": "Go-to-market: waar we het verschil maken",
     "gtm": "De meeste startups lopen niet vast op hun technologie, maar op de weg naar de markt. Wie is je ideale klant, wat mag het kosten, via welk kanaal verkoop je en hoe maak je van losse deals een herhaalbaar salesproces? Wij hebben die vragen zelf beantwoord bij bedrijven die we succesvol hebben opgebouwd en verkocht.",
-    "afterTitle": "Na de investering",
     "after": [
-      "We zijn hands-on waar dat helpt, zonder het roer over te nemen. Jij runt je bedrijf. Wij helpen je sneller de goede beslissingen te nemen. De eerste honderd dagen zijn intensief en kosteloos; daarna volgt een vast ritme van maandelijkse check-ins en kwartaalreviews. We werken toe naar een exit met een horizon van rond de vijf jaar, en we weten hoe dat gaat: we deden het zelf zes keer."
+      "We zijn hands-on waar dat helpt, zonder het roer over te nemen. Jij runt je bedrijf. Wij helpen je sneller de goede beslissingen te nemen. De eerste honderd dagen zijn intensief en kosteloos; daarna volgt een vast ritme van maandelijkse check-ins en kwartaalreviews. We werken toe naar een exit met een horizon van rond de vijf jaar."
     ],
-    "exitTitle": "Naar de exit",
-    "exit": "Wij investeren voor de lange termijn, meestal met een horizon van ongeveer vijf jaar. Samen met jou en de co-investeerders werken wij toe naar een moment waarop iedereen de opgebouwde waarde kan realiseren. Dat kan een strategische overname zijn, een grotere investeerder die instapt, of een management buy-out. Wij weten uit ervaring hoe dat werkt: wij hebben het zelf zes keer succesvol gedaan.",
     "boardQuote": "Wat zijn de drie dingen die dit kwartaal écht moeten gebeuren?"
   },
   "network": {
@@ -274,77 +230,25 @@ export const nl: Copy = {
     "intro": "Achter Ormac staat een netwerk van meer dan 80 ondernemers, investeerders en specialisten met wie we structureel samenwerken. Mensen die zelf bedrijven hebben gebouwd, opgeschaald en verkocht.",
     "areasTitle": "Kennisgebieden in ons netwerk",
     "areas": [
-      {
-        "title": "Markt en product-market fit",
-        "body": ""
-      },
-      {
-        "title": "Go-to-market en sales",
-        "body": ""
-      },
-      {
-        "title": "Marketing en merk",
-        "body": ""
-      },
-      {
-        "title": "Pricing en unit economics",
-        "body": ""
-      },
-      {
-        "title": "Product en roadmap",
-        "body": ""
-      },
-      {
-        "title": "Technologie en schaalbaarheid",
-        "body": ""
-      },
-      {
-        "title": "Data en AI",
-        "body": ""
-      },
-      {
-        "title": "Security",
-        "body": ""
-      },
-      {
-        "title": "Privacy en AVG",
-        "body": ""
-      },
-      {
-        "title": "AI-governance en EU AI Act",
-        "body": ""
-      },
-      {
-        "title": "Juridisch en IP",
-        "body": ""
-      },
-      {
-        "title": "Finance en rapportage",
-        "body": ""
-      },
-      {
-        "title": "Governance",
-        "body": ""
-      },
-      {
-        "title": "Team en leiderschap",
-        "body": ""
-      },
-      {
-        "title": "Internationalisering",
-        "body": ""
-      },
-      {
-        "title": "Vervolgfinanciering",
-        "body": ""
-      }
+      "Markt en product-market fit",
+      "Go-to-market en sales",
+      "Marketing en merk",
+      "Pricing en unit economics",
+      "Product en roadmap",
+      "Technologie en schaalbaarheid",
+      "Data en AI",
+      "Security",
+      "Privacy en AVG",
+      "AI-governance en EU AI Act",
+      "Juridisch en IP",
+      "Finance en rapportage",
+      "Governance",
+      "Team en leiderschap",
+      "Internationalisering",
+      "Vervolgfinanciering"
     ],
     "howTitle": "Hoe wij het netwerk inzetten",
-    "how": "Per investering koppelen we drie tot vijf experts aan je grootste groeiblokkades, met een heldere opdracht en een concreet resultaat. We zijn mentor bij Startupbootcamp en helpen je aan de juiste mede-investeerders, nu en in je volgende rondes.",
-    "coTitle": "Co-investeerders",
-    "co": "In ons netwerk zitten ook angels, investeerdersclubs en seed- en venturefondsen. Omdat wij altijd samen met andere investeerders instappen, helpen wij actief de juiste co-investeerders aan tafel te krijgen, nu en in je volgende rondes.",
-    "ecoTitle": "Onderdeel van het ecosysteem",
-    "eco": "Wij zijn actief in het Nederlandse startup-ecosysteem, onder meer als mentors bij Startupbootcamp. Zo vinden wij sterke proposities, en zo kunnen wij de juiste partners binnenhalen voor je volgende stap."
+    "how": "Per investering koppelen we drie tot vijf experts aan je grootste groeiblokkades, met een heldere opdracht en een concreet resultaat. We zijn mentor bij Startupbootcamp en helpen je aan de juiste mede-investeerders, nu en in je volgende rondes."
   },
   "portfolio": {
     "eyebrow": "Portfolio",
@@ -409,8 +313,6 @@ export const nl: Copy = {
     "eyebrow": "Over Ormac",
     "title": "Ondernemers die investeren in ondernemers",
     "intro": "Ormac werd in 2002 opgericht als holding- en investeringsmaatschappij, op initiatief van Ortwin Verreck. Sindsdien heeft Ormac bedrijven opgericht, overgenomen, opgebouwd en verkocht, vooral in data, digitale marketing en SaaS. We willen de brug zijn tussen een werkend product en een schaalbaar bedrijf.",
-    "missionTitle": "Onze missie",
-    "mission": "Wij willen de brug zijn tussen een werkend product en een schaalbaar bedrijf. Veel startups hebben hun technologie op orde, maar lopen vast op de weg naar de markt. Precies daar maken wij het verschil: met kapitaal, met bewezen go-to-market-ervaring en met een advisory board die je scherp en gefocust houdt.",
     "standTitle": "Waar wij voor staan",
     "stand": [
       {
@@ -438,9 +340,7 @@ export const nl: Copy = {
     ],
     "linkedin": "LinkedIn",
     "togetherTitle": "Samen met ons netwerk",
-    "together": "Ormac staat er niet alleen voor: bij elke investering werken we samen met ons netwerk van 80+ experts en met de mede-investeerders die met ons instappen. We werken vanuit een flexibele kantooromgeving met vestigingen door heel Nederland.",
-    "whereTitle": "Waar je ons vindt",
-    "where": "Wij werken vanuit een flexibel kantoornetwerk met locaties door heel Nederland. Zo blijven wij dicht bij de ondernemers waarin wij investeren, waar zij ook gevestigd zijn."
+    "together": "Ormac staat er niet alleen voor: bij elke investering werken we samen met ons netwerk van 80+ experts en met de mede-investeerders die met ons instappen. We werken vanuit een flexibele kantooromgeving met vestigingen door heel Nederland."
   },
   "faq": {
     "title": "Veelgestelde vragen",
@@ -484,49 +384,17 @@ export const nl: Copy = {
     ]
   },
   "contact": {
-    "eyebrow": "Dien een plan in",
     "title": "Dien je plan in",
     "intro": "Klaar voor de volgende stap? We lezen elk plan zorgvuldig en je hoort binnen twee weken van ons. Heeft je aanvraag haast, bijvoorbeeld omdat een financieringsronde binnenkort sluit? Geef dat aan, dan reageren we binnen vijf werkdagen.",
-    "need": "Wat heb je nodig? Een korte toelichting op het bedrijf, de ronde, en hoe je aan onze criteria voldoet. Het formulier invullen duurt ongeveer tien minuten.",
-    "emailHint": "Dien je pitchdeck en financieel plan in via het formulier.",
-    "general": "Algemene vragen via LinkedIn",
-    "plans": "Plannen indienen via het formulier",
-    "confidentialTitle": "Vertrouwelijkheid",
     "confidential": "We behandelen je plan en documenten vertrouwelijk. We delen ze alleen met experts uit ons netwerk als dat nodig is voor de beoordeling, en altijd na overleg met jou.",
-    "successTitle": "Dank je, wij hebben je plan ontvangen!",
-    "success": "In productie ontvang je een bevestiging per e-mail. Wij nemen binnen twee weken contact op. Heb je je aanvraag als spoed gemarkeerd? Dan hoor je binnen vijf werkdagen van ons.",
-    "successLang": "Deze inzending is gemarkeerd als Nederlands. Wij antwoorden in het Nederlands.",
-    "another": "Nog een plan indienen",
-    "submitting": "Versturen…",
-    "submit": "Verstuur mijn plan",
-    "required": "Verplicht",
-    "optional": "Optioneel",
-    "fields": {
-      "name": "Naam",
-      "role": "Functie",
-      "email": "E-mailadres",
-      "phone": "Telefoonnummer",
-      "company": "Bedrijfsnaam",
-      "website": "Website",
-      "description": "Beschrijf je bedrijf in maximaal 500 tekens",
-      "focus": "Aandachtsgebied",
-      "stage": "Fase",
-      "round": "Totale omvang van de ronde (€)",
-      "amount": "Gevraagd bedrag van Ormac (€)",
-      "use": "Waarvoor gebruik je het geld, en welke mijlpalen wil je ermee bereiken?",
-      "investors": "Welke andere investeerders doen mee of zijn in gesprek?",
-      "urgency": "Mijn aanvraag heeft spoed",
-      "urgencyWhy": "Waarom, en tot welke datum?",
-      "privacy": "Ik ga akkoord met de verwerking van mijn gegevens volgens de privacyverklaring"
-    },
     "focusOptions": [
       {
         "value": "health",
-        "label": "Personal health & sports"
+        "label": "Gezondheid & sport"
       },
       {
         "value": "learning",
-        "label": "Learning & development"
+        "label": "Leren & ontwikkeling"
       },
       {
         "value": "marketing",
@@ -555,17 +423,6 @@ export const nl: Copy = {
         "label": "Scale-up"
       }
     ],
-    "errors": {
-      "name": "Vul je naam in.",
-      "email": "Een e-mailadres is verplicht.",
-      "emailInvalid": "Dat e-mailadres lijkt niet geldig.",
-      "company": "Vul de bedrijfsnaam in.",
-      "description": "Vertel iets meer over het bedrijf.",
-      "focus": "Kies een aandachtsgebied.",
-      "stage": "Kies de fase die het beste past.",
-      "privacy": "Ga akkoord met de privacyverklaring.",
-      "urgency": "Vertel waarom het spoed heeft, en tot welke datum."
-    },
     "needTitle": "Wat heb je nodig?",
     "needs": [
       "Je pitchdeck",
@@ -575,9 +432,67 @@ export const nl: Copy = {
     ]
   },
   "footer": {
-    "tagline": "Van werkend product naar winnende propositie. Slim kapitaal van ondernemers met bewezen go-to-market-ervaring. Sinds 2002.",
     "legal": "Ormac B.V.",
-    "privacy": "Privacyverklaring",
-    "rights": "Alle rechten voorbehouden."
+    "privacy": "Privacyverklaring"
+  },
+  "pages": {
+    "founders": {
+      "title": "Investeerder gezocht? Wat Ormac zoekt in startups — Ormac",
+      "description": "Investeerder gezocht voor je startup? Onze zes criteria, de bedragen per fase (seed €25k–€50k, maximaal €250k) en hoe we samen met anderen instappen.",
+      "eyebrow": "Voor ondernemers",
+      "heading": "Een investeerder die meebouwt aan je go-to-market",
+      "lead": "Ormac investeert in Nederlandse digitale en AI-startups met een werkend product en eerste betalende klanten. Hier lees je waar we op letten, hoeveel we investeren en hoe dat in zijn werk gaat."
+    },
+    "approach": {
+      "title": "Onze aanpak: van intake tot advisory board — Ormac",
+      "description": "Zo werkt Ormac: intake binnen twee weken, due diligence met experts, een plek in je advisory board, go-to-markethulp en een netwerk van 80+ specialisten.",
+      "eyebrow": "Onze aanpak",
+      "heading": "Zo werken we samen",
+      "lead": "Van eerste contact tot investering en daarna: wat je van ons kunt verwachten, hoe de advisory board werkt en hoe we ons netwerk inzetten."
+    },
+    "portfolio": {
+      "title": "Portfolio en trackrecord — Ormac",
+      "description": "Actieve deelnemingen, zes succesvolle exits en twee investeringen die niet slaagden. Wat Ormac sinds 2002 bouwde, investeerde en leerde.",
+      "eyebrow": "Portfolio",
+      "heading": "Gebouwd, geïnvesteerd, geleerd",
+      "lead": "Actieve deelnemingen, zes exits en wat we leerden van wat niet lukte."
+    },
+    "about": {
+      "title": "Over Ormac en Ortwin Verreck — Ormac",
+      "description": "Ormac is sinds 2002 de investeringsmaatschappij van Ortwin Verreck: ondernemer, gecertificeerd toezichthouder, oprichter van Arvix en bouwer van OrangeValley.",
+      "eyebrow": "Over Ormac",
+      "heading": "Ondernemers die investeren in ondernemers",
+      "lead": "Sinds 2002 bouwen, investeren en verkopen we digitale bedrijven."
+    }
+  },
+  "explore": {
+    "title": "Meer over Ormac",
+    "items": [
+      {
+        "page": "founders",
+        "title": "Voor ondernemers",
+        "body": "Onze zes criteria, de bedragen per fase en wat we (nog) niet verwachten."
+      },
+      {
+        "page": "approach",
+        "title": "Onze aanpak",
+        "body": "Van intake tot closing in zes tot tien weken, de advisory board en ons netwerk."
+      },
+      {
+        "page": "portfolio",
+        "title": "Portfolio",
+        "body": "Actieve deelnemingen, zes exits en wat we leerden van wat niet lukte."
+      },
+      {
+        "page": "about",
+        "title": "Over Ormac",
+        "body": "Wie we zijn, waar we voor staan en wat Ortwin Verreck meebrengt."
+      }
+    ],
+    "more": "Lees meer"
+  },
+  "cta": {
+    "title": "Heb je een werkend product en je eerste betalende klanten?",
+    "body": "Dien je plan in. Je hoort binnen twee weken van ons, bij spoed binnen vijf werkdagen."
   }
 };

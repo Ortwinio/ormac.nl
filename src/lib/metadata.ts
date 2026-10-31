@@ -1,28 +1,45 @@
 import type { Metadata } from "next";
 import { copy } from "@/lib/copy";
-import { hreflangUrls, type Locale } from "@/lib/i18n";
+import { hreflangUrls, pageAlternates, type Locale, type PageId } from "@/lib/i18n";
 
-export function localeMetadata(locale: Locale, path = ""): Metadata {
-  const t = copy[locale];
-  const urls = hreflangUrls(locale, path);
-  const isPrivacy = path === "privacy";
+const ogImage = { url: "/images/og.jpg", width: 1200, height: 630, alt: "Ormac" };
+
+function build(locale: Locale, title: string, description: string, urls: { canonical: string; languages: Record<string, string> }): Metadata {
   return {
-    title: isPrivacy ? `${t.privacy.title} — Ormac` : t.meta.title,
-    description: isPrivacy ? t.privacy.lead : t.meta.description,
+    title,
+    description,
     metadataBase: new URL("https://ormac.nl"),
     alternates: {
       canonical: urls.canonical,
       languages: urls.languages,
     },
     openGraph: {
-      title: isPrivacy ? t.privacy.title : t.meta.title,
-      description: isPrivacy ? t.privacy.lead : t.meta.description,
+      title,
+      description,
       url: urls.canonical,
       siteName: "Ormac",
       locale: locale === "en" ? "en_GB" : "nl_NL",
       alternateLocale: locale === "en" ? ["nl_NL"] : ["en_GB"],
       type: "website",
-      images: [{ url: "/images/hero.jpg", width: 1600, height: 1200 }],
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage.url],
     },
   };
+}
+
+export function localeMetadata(locale: Locale, path = ""): Metadata {
+  const t = copy[locale];
+  const urls = hreflangUrls(locale, path);
+  if (path === "privacy") return build(locale, `${t.privacy.title} — Ormac`, t.privacy.lead, urls);
+  return build(locale, t.meta.title, t.meta.description, urls);
+}
+
+export function pageMetadata(locale: Locale, page: PageId): Metadata {
+  const p = copy[locale].pages[page];
+  return build(locale, p.title, p.description, pageAlternates(locale, page));
 }

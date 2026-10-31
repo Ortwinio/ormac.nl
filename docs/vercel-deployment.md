@@ -45,7 +45,7 @@ Google Analytics property settings were aligned on 29 September 2026 as recorded
 
 Add `ormac.nl` and `www.ormac.nl` under Vercel **Domains**. Use `ormac.nl` as the canonical production domain and configure `www.ormac.nl` to redirect to it. Apply the DNS values Vercel supplies for this project. Preserve existing email MX records and Resend verification records when changing website DNS. Confirm HTTPS works before testing the form.
 
-Canonical links, language alternatives, robots and sitemap already use `https://ormac.nl`. Check all four public routes: `/`, `/en/`, `/privacy/` and `/en/privacy/`.
+Canonical links, language alternatives, robots and sitemap already use `https://ormac.nl`. Check the public routes in both languages: home, the four sub pages (see README) and privacy. `www.ormac.nl` is added in Vercel as a 308 redirect to `ormac.nl`.
 
 The form accepts up to five PDF/Excel documents with **4 MB total file content** (4,000,000 bytes). The server caps the complete multipart body at 4,250,000 bytes, leaving room below Vercel's 4.5 MB request limit. The pitch deck must be a PDF. Supporting larger files requires private direct-to-storage uploads; increasing this limit alone will not work on Vercel.
 

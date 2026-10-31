@@ -48,3 +48,13 @@
   .preferences { grid-template-columns: 1fr; }
   .bannerActions { display: grid; grid-template-columns: 1fr; }
 }
+
+/* Compact banner on phones so the page stays visible behind it. */
+@media (max-width: 640px) {
+  .banner { padding: 16px 18px; gap: 12px; font-size: 14px; line-height: 1.45; }
+  .banner h2 { font-size: 17px; margin-bottom: 4px; }
+  .banner .privacyLink { margin-top: 6px; }
+  .bannerActions { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bannerActions .preferencesButton { grid-column: 1 / -1; }
+  .choice, .preferencesButton { min-height: 44px; padding: 10px 14px; font-size: 15px; }
+}

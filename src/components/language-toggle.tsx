@@ -1,6 +1,6 @@
 "use client";
 
-import { localeCookie, localePath, type Locale } from "@/lib/i18n";
+import { counterpartPath, localeCookie, type Locale } from "@/lib/i18n";
 import { copy } from "@/lib/copy";
 import styles from "./ormac.module.css";
 
@@ -13,9 +13,7 @@ export function LanguageToggle({ locale }: { locale: Locale }) {
 
   function go(next: Locale) {
     remember(next);
-    const hash = window.location.hash;
-    const privacy = window.location.pathname.replace(/\/$/, "").endsWith("/privacy");
-    window.location.assign(localePath(next) + (privacy ? "privacy/" : "") + hash);
+    window.location.assign(counterpartPath(window.location.pathname, next) + window.location.hash);
   }
 
   return (

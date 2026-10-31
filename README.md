@@ -15,11 +15,16 @@ npm run dev
 
 The dev server binds to **http://127.0.0.1:43127**.
 
-- `/` — Dutch
-- `/en/` — English
+- `/` and `/en/` — home: hero, figures, offer, focus areas, links to the sub pages, plan form and FAQ
+- `/voor-ondernemers/` and `/en/founders/` — criteria, stages and amounts, FAQ
+- `/aanpak/` and `/en/approach/` — process, advisory board, go-to-market and network (`#network`)
+- `/portfolio/` and `/en/portfolio/` — active investments, exits, investments that did not work out
+- `/over-ormac/` and `/en/about/` — Ormac and Ortwin Verreck
 - `/privacy/` and `/en/privacy/` — privacy statement
 
-The language toggle keeps the same section hash (`#founders`, `#contact`, …) and stores the choice in an `ormac-lang` cookie. There is no redirect from browser language or location. Crawlers always see Dutch at `/`.
+Slugs per language live in `pageSlugs` in `src/lib/i18n.ts`; page titles, descriptions and intros in `pages` in `src/lib/copy/{nl,en}.ts`. The language toggle maps each page to its counterpart.
+
+The language toggle opens the same page in the other language, keeps the section hash and stores the choice in an `ormac-lang` cookie. There is no redirect from browser language or location. Crawlers always see Dutch at `/`.
 
 The contact form sends all four steps and PDF/Excel attachments from **Ormac <plan@notifications.ormac.nl>** to **plan@ormac.nl** through Resend, using the applicant’s email as Reply-To. The sender is configured with `CONTACT_FROM_EMAIL` on the server; these addresses are not displayed on the website. It includes the selected language. The server validates the request origin, fields, attachments and hidden spam field before sending. Missing configuration and provider failures cannot show a successful submission.
 
@@ -61,6 +66,10 @@ npm start -- --port 43127
 
 ## Brand assets
 
-Content sections on both language versions, the privacy pages and the 404 page use `ScrollBlock` for native sticky positioning and a scroll-linked fade. Tall sections remain readable before pinning; section anchors remain on the outer wrapper. Measurements update when form steps, FAQ panels or viewport dimensions change. Reduced-motion preferences and print layouts use the normal document flow, and focused content remains opaque. The contact form, footer and cookie banner stay outside the animation so later blocks cannot cover interactive controls.
+Sections use `ScrollBlock`: blocks that start below the fold fade in once as they scroll into view. Content is visible without JavaScript, with reduced motion, in print and when focused, and sections never overlap. The plan form is not animated.
+
+## SEO
+
+Every page has its own title, description, canonical and hreflang (nl, en, x-default), an Open Graph/Twitter image (`public/images/og.jpg`, 1200×630) and Organization/Person JSON-LD; the home page adds FAQPage JSON-LD. Update `lastModified` in `src/app/sitemap.ts` when the copy changes. Search Console uses the domain property `ormac.nl` (verified through DNS); `www.ormac.nl` redirects to `ormac.nl` with a 308 in Vercel.
 
 Marks, favicons, photography and illustrations live in `public/brand` and `public/images`, copied from Ortwin’s local brand folders (Documents/Ormac BV and Downloads).

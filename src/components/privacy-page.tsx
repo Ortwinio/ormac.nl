@@ -9,7 +9,7 @@ import styles from "./privacy.module.css";
 
 export function PrivacyPageContent({ locale }: { locale: Locale }) {
   const t = copy[locale].privacy;
-  const contactLink = <Link href={`${localePath(locale)}#contact-details`}>{locale === "nl" ? "Neem contact op" : "Contact us"}</Link>;
+  const contactLink = <Link href={`${localePath(locale)}#contact`}>{locale === "nl" ? "Neem contact op" : "Contact us"}</Link>;
   return (
     <SiteShell locale={locale}>
       <article className={styles.page}>

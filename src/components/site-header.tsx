@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { LanguageToggle, rememberLocale } from "@/components/language-toggle";
 import { Brand } from "@/components/brand";
 import { copy } from "@/lib/copy";
-import { localePath, type Locale } from "@/lib/i18n";
+import { localePath, sectionHref, type Locale } from "@/lib/i18n";
 import s from "./ormac.module.css";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -37,9 +37,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       if (event.key === 'Escape' && open) { setOpen(false); menuRef.current?.focus(); }
     }}>
       <div className={`${s.wrap} ${s.headerInner}`}>
-        <Link href={`${home}#home`} className={s.brandLink} aria-label="Ormac – home" onClick={() => setOpen(false)}><Brand /></Link>
+        <Link href={home} className={s.brandLink} aria-label="Ormac – home" onClick={() => setOpen(false)}><Brand /></Link>
         <nav className={s.nav} aria-label={locale === "nl" ? "Hoofdnavigatie" : "Main navigation"}>
-          {nav.map(item => <Link key={item.id} href={`${home}#${item.id}`}>{item.label}</Link>)}
+          {nav.map(item => <Link key={item.id} href={sectionHref(locale, item.id)}>{item.label}</Link>)}
         </nav>
         <div className={s.headerRight}>
           <LanguageToggle locale={locale} />
@@ -50,7 +50,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </div>
       </div>
       <nav id="mobile-nav" className={s.mobileNav} hidden={!open} aria-label={locale === "nl" ? "Mobiele navigatie" : "Mobile navigation"}>
-        {nav.map(item => <Link key={item.id} href={`${home}#${item.id}`} onClick={() => setOpen(false)}>{item.label}</Link>)}
+        {nav.map(item => <Link key={item.id} href={sectionHref(locale, item.id)} onClick={() => setOpen(false)}>{item.label}</Link>)}
         <Link href={`${home}#faq`} onClick={() => setOpen(false)}>{locale === "nl" ? "Veelgestelde vragen" : "FAQ"}</Link>
         <Link href={`${home}#contact`} className={s.button} onClick={() => setOpen(false)}>{t.ctaPlan}</Link>
       </nav>
